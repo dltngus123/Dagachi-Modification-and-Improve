@@ -183,7 +183,7 @@ public class UsrCommonController {
 	    Member member = memberService.findId(name, email);
 
 	    if (member == null) {
-	        msg = "입력하신 정보에 일치하는 아이디가 없습니다.";
+	        msg = "none-data";
 	        return msg;
 	    } else {
 	        return member.getMember_id();
@@ -197,7 +197,7 @@ public class UsrCommonController {
 	    Member member = memberService.findPwd(id, nameForPwd);
 
 	    if (member == null) {
-	        msg = "입력하신 정보에 일치하는 회원이 없거나, 입력 오류입니다. 다시 입력해주세요.";
+	        msg = "none-data";
 	        return msg;
 	    } else {
 	        return member.getMember_pwd();

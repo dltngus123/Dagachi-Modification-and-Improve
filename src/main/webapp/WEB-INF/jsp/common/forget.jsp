@@ -236,7 +236,7 @@ margin-left:20px;
    <div class="card border-success mb-3" style="height:100%;">
     <div class="card-header text-bold text-center text-2xl">비밀번호를 잊으셨나요?</div>
   <div class="card-body flex items-center">
-  <div class="resultid w-full text-center text-2xl text-bold">
+  <div id="resultPwd" class="resultPwd w-full text-center text-2xl text-bold">
         회원님의 찾으신 비밀번호는
         <br/>
         <p id="rePwd"class="text-bold text-6xl text-success rePwd"></p>
@@ -269,101 +269,118 @@ if (msg !== null && msg !== "") {
    
 
 function idfind_go() {
-	  var name = document.getElementsByName("name")[0].value;
-	  var phone = document.getElementsByName("phone")[0].value;
-	  var email = document.getElementsByName("email")[0].value;
+     var name = document.getElementsByName("name")[0].value;
+     var phone = document.getElementsByName("phone")[0].value;
+     var email = document.getElementsByName("email")[0].value;
 
-	  if (name.trim() === "" || phone.trim() === "" || email.trim() === "") {
-	    alert("이름, 전화번호 및 이메일을 모두 입력해주세요.");
-	    return;
-	  }
+     if (name.trim() === "" || phone.trim() === "" || email.trim() === "") {
+       alert("이름, 전화번호 및 이메일을 모두 입력해주세요.");
+       return;
+     }
 
-	 
-	  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-	  if (!emailRegex.test(email)) {
-	    alert("이메일을 올바른 형식으로 입력해주세요. (ex: example@xxxx.com)");
-	    return;
-	  }
+    
+     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+     if (!emailRegex.test(email)) {
+       alert("이메일을 올바른 형식으로 입력해주세요. (ex: example@xxxx.com)");
+       return;
+     }
 
-	  $.ajax({
-		    url: "findId",
-		    type: "POST",
-		    dataType: "json",
-		    data: {
-		      name: name,
-		      phone: phone,
-		      email: email
-		    },
-		    success: function(response) {
-		      console.log(response);
+     $.ajax({
+          url: "findId",
+          type: "POST",
+          dataType: "text",
+          data: {
+            name: name,
+            phone: phone,
+            email: email
+          },
+          success: function(response) {
+            console.log(response);
 
-		      // 결과를 출력할 요소 선택
-		      var reIdElement = document.getElementById('reId');
+            // 결과를 출력할 요소 선택
+            var reIdElement = document.getElementById('reId');
+            var resultidElement = document.getElementsByClassName('resultid')[0];
 
-		      // 결과를 포함한 HTML 생성
-		      var resultHTML = "<p id='reId' class='text-bold text-6xl text-success reId'>" + response + "</p>";
+            if (response === 'none-data') {
+              // 결과가 없는 경우
+              reIdElement.innerHTML = ""; 
+              resultidElement.textContent = "일치하는 정보가 없습니다.";
+            } else {
+              
+              var resultHTML =
+                 "찾으신 아이디는"+
+                 "<p id='reId' class='text-bold text-6xl text-success reId'>" + response + "</p>"
+                 +"입니다.";
+             
+              resultidElement.innerHTML = resultHTML;
+              
+            }
+          },
+          error: function(xhr, status, error) {
+            console.log("에러 " + error);
+          }
+        });
+      }
 
-		      // 결과를 요소에 삽입
-		      reIdElement.innerHTML = resultHTML;
+   function pwdfind_go() {
+     var id = document.getElementsByName("id")[0].value;
+     var nameForPwd = document.getElementsByName("nameForPwd")[0].value;
+     var phoneForPwd = document.getElementsByName("phoneForPwd")[0].value;
+     var emailForPwd = document.getElementsByName("emailForPwd")[0].value;
 
-		      // 폼 제출
-		      document.forms["id"].submit();
-		    },
-		    error: function(xhr, status, error) {
-		      console.log("에러 " + error);
-		    }
-		  });
-		}
+     if (id.trim() === "" || nameForPwd.trim() === "" || phoneForPwd.trim() === "" || emailForPwd.trim() === "") {
+       alert("아이디, 이름, 전화번호 및 이메일을 모두 입력해주세요.");
+       return;
+     }
+     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+     if (!emailRegex.test(emailForPwd)) {
+       alert("이메일을 올바른 형식으로 입력해주세요. (ex: example@xxxx.com)");
+       return;
+     }
 
-	function pwdfind_go() {
-	  var id = document.getElementsByName("id")[0].value;
-	  var nameForPwd = document.getElementsByName("nameForPwd")[0].value;
-	  var phoneForPwd = document.getElementsByName("phoneForPwd")[0].value;
-	  var emailForPwd = document.getElementsByName("emailForPwd")[0].value;
+     var phoneRegex = /^\d{3}-\d{4}-\d{4}$/;
+     if (!phoneRegex.test(phoneForPwd)) {
+       alert("전화번호를 형식에 맞게 입력해주세요. (ex: 000-0000-0000)");
+       return;
+     }
 
-	  if (id.trim() === "" || nameForPwd.trim() === "" || phoneForPwd.trim() === "" || emailForPwd.trim() === "") {
-	    alert("아이디, 이름, 전화번호 및 이메일을 모두 입력해주세요.");
-	    return;
-	  }
-	  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-	  if (!emailRegex.test(emailForPwd)) {
-	    alert("이메일을 올바른 형식으로 입력해주세요. (ex: example@xxxx.com)");
-	    return;
-	  }
+     $.ajax({
+          url: "findPwd",
+          type: "POST",
+          dataType: "text",
+          data: {
+            id: id,
+            nameForPwd: nameForPwd,
+            phoneForPwd: phoneForPwd,
+            emailForPwd: emailForPwd
+          },
+          success: function(response) {
+            console.log(response);
 
-	  var phoneRegex = /^\d{3}-\d{4}-\d{4}$/;
-	  if (!phoneRegex.test(phoneForPwd)) {
-	    alert("전화번호를 형식에 맞게 입력해주세요. (ex: 000-0000-0000)");
-	    return;
-	  }
+            // 결과를 출력할 요소 선택
+            var rePwdElement = document.getElementById('rePwd');
+            var resultPwdElement=document.getElementById('resultPwd');
+            
+            if (response === 'none-data') {
+                // 결과가 없는 경우
+                rePwdElement.innerHTML = ""; 
+                resultPwdElement.textContent = "일치하는 정보가 없습니다.";
+              }else{
+                 var resultHTML =
+                     "찾으신 비밀번호는"+
+                     "<p id='rePwd' class='text-bold text-6xl text-success reId'>" + response + "</p>"
+                     +"입니다.";
+                 
+                  resultPwdElement.innerHTML = resultHTML;
+              }
 
-	  $.ajax({
-		    url: "findPwd",
-		    type: "POST",
-		    dataType: "json",
-		    data: {
-		      id: id,
-		      nameForPwd: nameForPwd,
-		      phoneForPwd: phoneForPwd,
-		      emailForPwd: emailForPwd
-		    },
-		    success: function(response) {
-		      console.log(response);
-
-		      // 결과를 출력할 요소 선택
-		      var rePwdElement = document.getElementById('rePwd');
-
-		      // 결과를 요소에 삽입
-		      rePwdElement.innerHTML = response;
-
-		      // 폼 제출
-		      document.forms["pwd"].submit();
-		    },
-		    error: function(xhr, status, error) {
-		      console.log("에러 " + error);
-		    }
-		  });
-		}
+           
+          },
+          error: function(xhr, status, error) {
+            console.log("에러 " + error);
+          }
+        });
+      }
 
 
    
