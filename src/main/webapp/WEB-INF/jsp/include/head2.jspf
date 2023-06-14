@@ -1,0 +1,283 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>dagachi</title>
+
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<style>
+#scrollHidden{
+   overflow-y:scroll;
+   height:100vh;
+}
+   #scrollHidden::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+}
+</style>
+
+
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/resource/bootstrap/plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  
+  <!-- summernote -->
+  <link rel="stylesheet" href="/resource/bootstrap/plugins/summernote/summernote-bs4.min.css">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<!-- //fullcalendar 언어 설정관련 script -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
+   
+   <!-- 테일윈드 불러오기 -->
+   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.0.4/dist/full.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
+   <!-- 노말라이즈, 라이브러리까지 한번에 해결 -->
+   
+</head>
+<body class="hold-transition sidebar-mini layout-fixed " style="margin:0;">
+
+<nav class="flex justify-end bg-blue-300">
+
+   <div class="dropdown dropdown-bottom dropdown-end">
+  <label tabindex="0" class="m-1 text-2xl">
+   <i class="fas fa-star text-yellow-300 p-4"></i>
+</label>
+  <ul tabindex="1" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 favList z-50">
+    
+  </ul>
+</div>
+  </nav>
+
+<button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+   <span class="sr-only">Open sidebar</span>
+   <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+   </svg>
+</button>
+
+<aside id=""  class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+    
+   <div id="scrollHidden"class="h-full px-3 py-4 overflow-y-auto bg-gray-200 dark:bg-gray-800" style="">
+   <div class="flex">
+  <a href="/usr/home/main" class="brand-link">
+    <span class="text-bold" style="font-size:2rem; border:2px solid; padding:4px;">多</span>
+    <span class="text-bold" style="font-size: 1.5rem;">dagachi</span>
+  </a>
+</div>
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex flex-wrap rounded-md " style="background-color:white; justify-content:center;">
+<div id="userimg" class="col-sm-3 flex justify-center">
+<img src="${pageContext.request.contextPath}/common/getPicture?id=${loginUser.member_id}" alt="User Image"
+    style="width: 40%; object-fit: contain;">
+    
+   <div class="my-auto">
+        <div class="info mt-2 " style=" margin-left:15px;">
+          <div class="d-block" style="font-weight:bold;">${loginUser.member_name } <span style="font-size:0.5rem;">${loginUser.member_rank }</span></div>
+          <div class="d-block" style="">${loginUser.member_department1 }</div>
+   
+         
+         <div class="d-block" style="">
+       <c:if test="${loginUser.member_status eq 1 }">
+       <span class="badge bg-primary text-white p-2">출근</span>
+     </c:if>
+       
+       <c:if test="${loginUser.member_status eq 4 }">
+       <span class="badge bg-waring">연차</span>
+     </c:if>
+       <c:if test="${loginUser.member_status eq 5 }">
+       <span class="badge bg-waring">월차</span>
+     </c:if>
+       <c:if test="${loginUser.member_status eq 3 }">
+       <span class="badge bg-red-500 text-white">자리비움</span>
+     </c:if>
+</div>
+</div>
+        </div>
+</div>
+
+
+<div class="flex justify-center">
+ <div class="my-auto">
+       <div class="select-group-wrap" style="display:block; margin-left:15px; margin-top:5px;">
+    <select class="form-control" name="perPageNum" id="perPageNum" onchange="updateMemberStatusDisplay()">
+        <option value="" selected="상태">상태</option>
+        <option value="1">출근</option>
+        <option value="3">자리비움</option>
+    </select>
+</div>
+</div>
+
+<button onclick="changeStatus(); location.reload();" class="btn btn-sm" style="margin-left:5px; margin-top:5px; background-color:#e2e2e2; border:none; color:black;">상태변경</button>
+</div>
+<button onclick="logout()" class="btn btn-sidebar" style="margin-left:15px; margin-top:5px; background-color:#e2e2e2; border:none; color:black; width:200px;">로그아웃</button>
+
+      </div>
+
+ 
+   
+      <ul class="space-y-2 font-medium">
+         <li>
+            <button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                 <span class="w-6 h-6">
+                 📑
+                 </span>
+                  <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>전자결재</span>
+                  <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+            <ul id="dropdown-example" class="hidden py-2 space-y-2">
+                  <li>
+                     <a href="/approval/main" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">메인</a>
+                  </li>
+                  <li>
+                     <a href="/approval/registForm" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">새 결재 작성</a>
+                  </li>
+                  <li>
+                     <a href="/approval/list?Type=approval&save=1" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">발신</a>
+                  </li>
+                     <li>
+                     <a href="/approval/list?Type=approver&save=1" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">수신</a>
+                  </li>
+            </ul>
+         </li>
+           <li>
+            <button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                 <span class="w-6 h-6">
+                 📋
+                 </span>
+                  <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>업무관리</span>
+                  <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+            <ul id="dropdown-example" class="hidden py-2 space-y-2">
+                  <li>
+                     <a href="/dagachi/projectL/list" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">부서별 업무 조회</a>
+                  </li>
+                  <li>
+                     <a href="/dagachi/projectM/list" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">팀별 업무 조회</a>
+                  </li>
+                  <li>
+                     <a href="/dagachi/projectS/list" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">업무 등록 및  수주</a>
+                  </li>
+            </ul>
+         </li>
+         <li>
+            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path><path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path></svg>
+               <span class="flex-1 ml-3 whitespace-nowrap">Inbox</span>
+               <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
+            </a>
+         </li>
+         <li>
+            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+               <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
+            </a>
+         </li>
+         <li>
+            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
+               <span class="flex-1 ml-3 whitespace-nowrap">Products</span>
+            </a>
+         </li>
+         <li>
+            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
+               <span class="flex-1 ml-3 whitespace-nowrap">Sign In</span>
+            </a>
+         </li>
+         <li>
+            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z" clip-rule="evenodd"></path></svg>
+               <span class="flex-1 ml-3 whitespace-nowrap">Sign Up</span>
+            </a>
+         </li>
+      </ul>
+   </div>
+</aside>
+
+<script>
+var dropdownButton = document.querySelector('[data-collapse-toggle="dropdown-example"]');
+var dropdownMenu = document.querySelector('#dropdown-example');
+
+dropdownButton.addEventListener('click', function() {
+  dropdownMenu.classList.toggle('hidden');
+});
+</script>
+
+ <script>
+  function logout() {
+   
+     $.ajax({
+       url: '/common/logout',
+       type: 'GET',
+       data: {
+            attendence_member: '${loginUser.member_id}',
+            member_team: '${loginUser.member_team}',
+            member_department: '${loginUser.member_department}'
+          },
+       success: function(response) {
+        
+         console.log(response);
+         
+        
+         window.location.href = "/common/logout";
+       },
+       error: function(error) {
+         
+         console.log(error);
+         window.location.href = "/common/logout";
+       }
+     });
+   }
+
+</script>
+
+<script>
+
+
+function changeStatus() {
+    var selectedStatus = $("#perPageNum").val();
+
+    $.ajax({
+        url: "/common/changeStatus",
+        type: "POST",
+        data: {
+            memberStatus: selectedStatus
+        },
+        success: function(response) {
+            console.log(response);
+            
+           
+            
+            location.reload();
+        },
+        error: function(error) {
+            console.log(error);
+            window.location.href = "redirect:/usr/home/main";
+        }
+    });
+}
+
+// Call updateMemberStatusDisplay on page load to initialize the member status display
+$(document).ready(function() {
+    
+});
+/* 
+window.onload=function(){
+      autoOff();
+   } */
+</script>
