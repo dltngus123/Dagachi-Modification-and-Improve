@@ -28,7 +28,7 @@
    
 </script>
 <input type="hidden" name="${attendence.attendence_regDate }"/>
-<div class="content-wrapper" style="background-color:white;">	
+<div class="p-4 sm:ml-64">
 <div class="content-header">
 <h1>
    <a href='javascript:registBookMark("/attendence/list", "근태 조회")'>

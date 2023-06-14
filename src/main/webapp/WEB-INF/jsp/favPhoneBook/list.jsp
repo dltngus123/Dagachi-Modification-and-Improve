@@ -10,7 +10,7 @@
    }
    
 </script>
-   <div class="content-wrapper">
+ <div class="p-4 sm:ml-64">
    <div class="content-header">
   <h1>
    <a href='javascript:registBookMark("/dagachi/favPhoneBook/favList", "중요 연락처")'>

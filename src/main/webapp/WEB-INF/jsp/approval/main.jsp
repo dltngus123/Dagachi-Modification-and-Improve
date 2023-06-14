@@ -53,6 +53,7 @@
    }
    
 </script>
+<div class="p-4 sm:ml-64">
 <div class="content-header">
 <h1>
    <a href='javascript:registBookMark("/approval/main", "전자결재 메인")'>

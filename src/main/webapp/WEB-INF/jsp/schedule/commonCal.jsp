@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', function() {
    
 </script>
 
-<div class="content-wrapper" style="background-color:white;">
+<div class="p-4 sm:ml-64">
 <div>
 <div class="content-header">
 	   		    	<h1>

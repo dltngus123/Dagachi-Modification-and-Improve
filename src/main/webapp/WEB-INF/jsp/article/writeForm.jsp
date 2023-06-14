@@ -4,8 +4,7 @@
 
 <%@include file="/WEB-INF/jsp/include/head.jspf" %>
 <link href="/resource/bootstrap/plugins/summernote/summernote-bs4.min.css" rel="stylesheet"/>
-
-<div class="content-wrapper">
+<div class="p-4 sm:ml-64">
   <div class="col-md-12" style="text-align:right; margin-top:15px; margin-bottom:15px; background-color:white;">
     <h1 style="text-align:left; background-color:white;">게시글 등록</h1>
     <button class="btn btn-sidebar" style="background-color: #D7D7D7; width: 100px;"><a href="/article/list">목록</a></button>

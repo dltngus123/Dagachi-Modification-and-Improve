@@ -48,7 +48,7 @@
 	margin: 0 auto;
 }
 </style>
-<div class="content-wrapper">
+<div class="p-4 sm:ml-64">
 
 	<div class="card">
 		<span style="font-weight: bold; font-size: 20px; padding: 10px;">

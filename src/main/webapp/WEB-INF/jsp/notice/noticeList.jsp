@@ -11,7 +11,7 @@
    }
    
 </script>
-<div class="content-wrapper" style="background-color:white;">
+<div class="p-4 sm:ml-64">
 <div class="col-md-12">
 <div class="content-header">
 <h1>

@@ -50,7 +50,7 @@
 }
 </style>
 
-<div class="content-wrapper">
+<div class="p-4 sm:ml-64">
 	<div class="card" style="width: 90%; margin: auto;">
 		<div class="card-header">
 			<h5 style="padding: none;">새 결재 작성</h5>

@@ -4,7 +4,7 @@
  <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../include/head.jspf"%>
-<div class="content-wrapper mt-4">
+<div class="p-4 sm:ml-64">
    
    <h1>
    <i class="fas fa-star text-yellow"></i>

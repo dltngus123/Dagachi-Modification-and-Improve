@@ -27,7 +27,7 @@
  
 </style>
 
-<div class="content-wrapper">
+<div class="p-4 sm:ml-64">
 	
     <div class="card">
     	<div class="card-header">

@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="pageTitle" value="메인" />
 <%@include file="../include/head.jspf"%>
-<div class="content-wrapper">
+<div class="p-4 sm:ml-64">
 		<section class="mt-5">
   <div class="container mx-auto px-3">
  

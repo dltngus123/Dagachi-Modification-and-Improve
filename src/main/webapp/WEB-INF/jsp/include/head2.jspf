@@ -46,7 +46,9 @@
    
    <!-- 테일윈드 불러오기 -->
    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.0.4/dist/full.css" rel="stylesheet" type="text/css" />
+   
 <script src="https://cdn.tailwindcss.com"></script>
+
    <!-- 노말라이즈, 라이브러리까지 한번에 해결 -->
    
 </head>
@@ -62,6 +64,28 @@
     
   </ul>
 </div>
+
+
+ <div class="dropdown dropdown-bottom dropdown-end">
+  <label tabindex="0" class="m-1 text-2xl">
+   <i class="far fa-bell p-4">
+   <span class="badge badge-warning navbar-badge cnt"></span>
+   </i>   
+</label>
+  <ul tabindex="2" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-80 z-50">
+  <li class="nav-item dropdown" id="notifications">
+  <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <div id="notifications_next"></div>
+            <div class="dropdown-divider"></div>
+          </div>
+          <div class="toastsDefaultBottomRight" style="display:none;"></div>
+          <button class="" onclick="deleteNotifications()">알림 삭제</button>
+    
+    </li>
+  </ul>
+</div>
+
+
   </nav>
 
 <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -155,14 +179,14 @@
             </ul>
          </li>
            <li>
-            <button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+            <button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example2" data-collapse-toggle="dropdown-example2">
                  <span class="w-6 h-6">
                  📋
                  </span>
                   <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>업무관리</span>
                   <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
-            <ul id="dropdown-example" class="hidden py-2 space-y-2">
+            <ul id="dropdown-example2" class="hidden py-2 space-y-2">
                   <li>
                      <a href="/dagachi/projectL/list" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">부서별 업무 조회</a>
                   </li>
@@ -174,35 +198,88 @@
                   </li>
             </ul>
          </li>
+           <li>
+            <button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example3" data-collapse-toggle="dropdown-example3">
+                 <span class="w-6 h-6">
+                 📅
+                 </span>
+                  <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>일정관리</span>
+                  <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+            <ul id="dropdown-example3" class="hidden py-2 space-y-2">
+                  <li>
+                     <a href="/schedule/commonCal" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">사내일정</a>
+                  </li>
+                  <li>
+                     <a href="/schedule/personalCal" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">개인일정</a>
+                  </li>
+            </ul>
+         </li>
+        <li>
+            <button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example4" data-collapse-toggle="dropdown-example4">
+                 <span class="w-6 h-6">
+                 👩🏻‍🧑🏻‍🧒🏻
+                 </span>
+                  <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>커뮤니티</span>
+                  <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+            <ul id="dropdown-example4" class="hidden py-2 space-y-2">
+                  <li>
+                     <a href="/notice/noticeList" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">공지사항</a>
+                  </li>
+                  <li>
+                     <a href="/article/list" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">공유 게시판</a>
+                  </li>
+                  <li>
+                     <a href="/dagachi/proceeding/list" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">회의록</a>
+                  </li>
+            </ul>
+         </li>
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path><path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path></svg>
-               <span class="flex-1 ml-3 whitespace-nowrap">Inbox</span>
-               <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
+            <a href="/reservation/list" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                <span class="w-6 h-6">
+                 🗓
+                 </span>
+               <span class="flex-1 ml-3 whitespace-nowrap">회의실 예약</span>
             </a>
          </li>
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-               <span class="flex-1 ml-3 whitespace-nowrap">Users</span>
+            <a href="/attendence/list" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <span class="w-6 h-6">
+                 🧑‍💻
+                 </span>
+               <span class="flex-1 ml-3 whitespace-nowrap">근태 관리</span>
             </a>
          </li>
          <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
-               <span class="flex-1 ml-3 whitespace-nowrap">Products</span>
-            </a>
+            <button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example5" data-collapse-toggle="dropdown-example5">
+                 <span class="w-6 h-6">
+                 📠
+                 </span>
+                  <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>주소록</span>
+                  <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+            <ul id="dropdown-example5" class="hidden py-2 space-y-2">
+                  <li>
+                     <a href="/dagachi/favPhoneBook/favList" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">중요주소록</a>
+                  </li>
+                  <li>
+                     <a href="/dagachi/phoneBook/showList?phone_book_type=1" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">공유주소록</a>
+                  </li>
+                  <li>
+                     <a href="/dagachi/phoneBook/showList?phone_book_type=2" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">개인주소록</a>
+                  </li>
+                     <li>
+                     <a href="/dagachi/phoneBook/showList?phone_book_type=3" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">휴지통</a>
+                  </li>
+            </ul>
          </li>
-         <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
-               <span class="flex-1 ml-3 whitespace-nowrap">Sign In</span>
-            </a>
-         </li>
-         <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-               <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z" clip-rule="evenodd"></path></svg>
-               <span class="flex-1 ml-3 whitespace-nowrap">Sign Up</span>
+            <li>
+            <a href="/dagachi/phoneBook/companyPhoneBookList" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+               <span class="w-6 h-6">
+                 📞
+                 </span>
+               <span class="flex-1 ml-3 whitespace-nowrap">사내 연락처</span>
             </a>
          </li>
       </ul>
@@ -210,13 +287,55 @@
 </aside>
 
 <script>
-var dropdownButton = document.querySelector('[data-collapse-toggle="dropdown-example"]');
-var dropdownMenu = document.querySelector('#dropdown-example');
+var dropdownButton = $('[data-collapse-toggle="dropdown-example"]');
+var dropdownMenu = $('#dropdown-example');
 
-dropdownButton.addEventListener('click', function() {
-  dropdownMenu.classList.toggle('hidden');
-});
+$( document ).ready(function() {
+    dropdownButton.click( function() {
+      dropdownMenu.slideToggle();
+    } );
+  } );
+
+
+var dropdownButton2 = $('[data-collapse-toggle="dropdown-example2"]');
+var dropdownMenu2 = $('#dropdown-example2');
+
+$( document ).ready(function() {
+    dropdownButton2.click( function() {
+      dropdownMenu2.slideToggle();
+    } );
+  } );
+
+var dropdownButton3 =$('[data-collapse-toggle="dropdown-example3"]');
+var dropdownMenu3 =$('#dropdown-example3');
+
+$( document ).ready(function() {
+    dropdownButton3.click( function() {
+      dropdownMenu3.slideToggle();
+    } );
+  } );
+
+var dropdownButton4 = $('[data-collapse-toggle="dropdown-example4"]');
+var dropdownMenu4 = $('#dropdown-example4');
+
+$( document ).ready(function() {
+    dropdownButton4.click( function() {
+      dropdownMenu4.slideToggle();
+    } );
+  } );
+
+var dropdownButton5 =$('[data-collapse-toggle="dropdown-example5"]');
+var dropdownMenu5 = $('#dropdown-example5');
+
+$( document ).ready(function() {
+    dropdownButton5.click( function() {
+      dropdownMenu5.slideToggle();
+    } );
+  } );
+
 </script>
+
+
 
  <script>
   function logout() {
@@ -281,3 +400,104 @@ window.onload=function(){
       autoOff();
    } */
 </script>
+
+
+
+<script type="text/javascript">
+            $(function() {
+              function pollForNotifications() {
+                $.ajax({
+                  url: '/notification/check',
+                  method: 'GET',
+                  success: function(data) {
+                    // data에서 .dropdown-header의 내용 추출
+                    var dropdownHeaderContent = $(data).filter('.dropdown-header').text();
+                    // 정규 표현식을 사용하여 숫자 부분만 추출
+                    var numericContent = dropdownHeaderContent.match(/\d+/g);
+                    // 일치하는 부분이 있으면 사용하고, 그렇지 않으면 '0'으로 기본 설정.
+                    var count = numericContent ? numericContent[0] : '0';
+                    $(".badge.badge-warning.navbar-badge.cnt").html(count);
+                    if(count == 0){
+                    	data='알람이 없습니다';
+                    }
+                    $("#notifications_next").html(data);
+                    
+                  },
+                  error: function(jqXHR, textStatus, errorThrown) {
+                    // Handle error here
+                    console.error("notifications Error occurred: ", textStatus, errorThrown);
+                  }
+                });
+              }
+              pollForNotifications();
+              setInterval(pollForNotifications, 5000);
+            });
+            
+            toastr.options = {
+                   "closeButton": false,
+                   "debug": false,
+                   "newestOnTop": false,
+                   "progressBar": false,
+                   "positionClass": "toast-bottom-right",
+                   "preventDuplicates": false,
+                   "onclick": null,
+                   "showDuration": "300",
+                   "hideDuration": "1000",
+                   "timeOut": "5000",
+                   "extendedTimeOut": "1000",
+                   "showEasing": "swing",
+                   "hideEasing": "linear",
+                   "showMethod": "fadeIn",
+                   "hideMethod": "fadeOut",
+                   "delayOnHover": true
+               }
+
+               $(document).ready(function() {
+                   var closedNotifications = JSON.parse(localStorage.getItem('closedNotifications')) || [];
+
+                   var fetchNotifications = function() {
+                       $.ajax({
+                           url: '/notification/path',
+                           method: 'GET',
+                           success: function(data) {
+                               data.forEach(function(notification) {
+                                   if (!closedNotifications.includes(notification.notification_id)) {
+                                       toastr["info"](notification.notification_body)
+                                       closedNotifications.push(notification.notification_id);
+                                       localStorage.setItem('closedNotifications', JSON.stringify(closedNotifications));
+                                   }
+                               });
+                           },
+                           error: function(jqXHR, textStatus, errorThrown) {
+                               console.error("A notification error occurred: ", textStatus, errorThrown);
+                           }
+                       });
+                   };
+
+                   // Call once at the beginning
+                   fetchNotifications();
+
+                   // Then call every 5 seconds
+                   setInterval(fetchNotifications, 5000); // 5000ms = 5 seconds
+               });
+
+
+
+
+               function deleteNotifications() {
+                 $.ajax({
+                   url: '/notification/delete',
+                   method: 'GET',
+                   success: function(data) {
+                     console.log("삭제 완료");
+                     // 삭제 후 알림 다시 로드
+                     pollForNotifications();
+                   },
+                   error: function(jqXHR, textStatus, errorThrown) {
+                     // 에러 처리
+                     console.error("알림 삭제 오류 발생: ", textStatus, errorThrown);
+                   }
+                 });
+               }
+
+          </script>
