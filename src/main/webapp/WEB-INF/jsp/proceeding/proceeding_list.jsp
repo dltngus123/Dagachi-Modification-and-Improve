@@ -6,8 +6,9 @@
 <%@include file="../include/head.jspf"%>
 <div class="p-4 sm:ml-64">
 
-<div class="content-header">
-<h1>
+
+<div class="content-header mb-4">
+<h1 class="text-3xl">
    <a href='javascript:registBookMark("/dagachi/proceeding/list", "회의록 전체 조회")'>
    <i class="fas fa-star bookmarkCheck"></i>
    </a>
@@ -18,32 +19,32 @@
 </div>
 	<div class="col-12">
 	  <div class="card">
-	    <div class="card-header row">
+	    <div class="card-header flex justify-between">
 	      <!-- <h3 class="card-title"></h3> -->
 	      <div class="btns col-sm-6">
-	      	<button type="button" class="btn bg-gradient" style="background: #5865F2; color:#ffffff;" 
+	      	<button type="button" class="btn btn-sm bg-blue-400 text-white" 
 	      	onclick="location.href='regist'">회의록 등록</button>
 	      </div>
 	      <div class="card-tools col-sm-6">
 	        <form action="list" class="">
-	        <div class="input-group input-group-sm">
-	          <select name="searchType">
+			<div class="w-full flex justify-end input-bordered" >
+	          <select name="searchType" class="input-sm w-2/5 input input-bordered ">
 	          	<option value="" disabled="disabled" selected="selected">검색구분</option>
 	          	<option value="title" ${searchType eq 'title' ? 'selected':'' }>제목</option>
 	          	<option value="body" ${searchType eq 'body' ? 'selected':'' }>내용</option>
 	          </select>
-	          <input
+	          <input class="w-3/5 input input-bordered input-sm"
 	            type="text"
 	            name="keyword"
-	            class="form-control float-right"
+	            
 	            placeholder="Search"
 	            value="${keyword }"
 	          />
 	       
 	          <div class="input-group-append">
-	            <button type="button" class="btn btn-default" onclick="">
-	              <i class="fas fa-search"></i>
-	            </button>
+	             <button type="submit" class="w-1/8 bg-blue-300 btn-sm btn">
+            	<i class="fas fa-search text-lg"></i>
+            	</button>
 	          </div>
 	        </div>
 	        </form>
@@ -75,7 +76,7 @@
 	        			</td>
 	        			
 	        			<td>
-	        				<span class="badge bg-danger">긴급</span>
+	        				<span class="badge bg-red-400 text-white">긴급</span>
 	        			</td>
 	        			<fmt:formatDate pattern="yyyy.MM.dd" value="${imp.form_proceeding_updateDate }" var="updateDate"/>
 	        			<td>${updateDate }</td>
@@ -93,19 +94,19 @@
 	        			
 	        			<td>
 	        				<c:if test="${proceed.form_proceeding_type eq 0 }">
-	        					<span class="badge bg-danger">긴급</span>
+	        					<span class="badge bg-red-400 text-white" >긴급</span>
 	        				</c:if>
 	        				<c:if test="${proceed.form_proceeding_type eq 1 }">
-	        					<span class="badge bg-primary">주간</span>
+	        					<span class="badge bg-primary text-white">주간</span>
 	        				</c:if>
 	        				<c:if test="${proceed.form_proceeding_type eq 2 }">
-	        					<span class="badge bg-primary">월간</span>
+	        					<span class="badge bg-primary text-white">월간</span>
 	        				</c:if>
 	        				<c:if test="${proceed.form_proceeding_type eq 3 }">
-	        					<span class="badge bg-warning">임원</span>
+	        					<span class="badge bg-warning text-white">임원</span>
 	        				</c:if>
 	        				<c:if test="${proceed.form_proceeding_type eq 4 }">
-	        					<span class="badge bg-success">협력</span>
+	        					<span class="badge bg-success text-white">협력</span>
 	        				</c:if>
 	        			</td>
 	        			<fmt:formatDate pattern="yyyy.MM.dd" value="${proceed.form_proceeding_updateDate }" var="updateDate"/>
@@ -119,14 +120,14 @@
 	      
 	    </div>
 	  </div>
-	  <div class="row">
+	      <div class="">
   <div class="col">
     <nav aria-label="Contacts Page Navigation">
       <c:set var="pageMenuArmLen" value="4" />
       <c:set var="startPage" value="${page - pageMenuArmLen < 1 ? 1 : page - pageMenuArmLen}" />
       <c:set var="endPage" value="${page + pageMenuArmLen > pagesCount ? pagesCount : page + pageMenuArmLen}" />
-      <c:set var="pageBaseUri" value="searchType=${param.searchType }&keyword=${param.keyword }" />
-      <ul class="pagination justify-content-center m-0">
+      <c:set var="pageBaseUri" value="boardId=${article.board_id}&searchKeyword=${param.searchKeyword}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
+      <ul class="pagination flex justify-center m-0">
         <c:if test="${startPage > 1}">
           <li class="page-item">
             <a class="page-link btn btn-sm" href="?${pageBaseUri}&page=1">1</a>
@@ -138,8 +139,8 @@
           </c:if>
         </c:if>
         <c:forEach begin="${startPage}" end="${endPage}" var="i">
-          <li class="page-item ${param.page == i ? 'active' : ''}">
-            <a class="page-link btn btn-sm" href="?${pageBaseUri}&page=${i}">${i}</a>
+          <li class="page-item">
+            <a class="page-link btn btn-sm  ${param.page == i ? 'btn-active' : ''}" href="?${pageBaseUri}&page=${i}">${i}</a>
           </li>
         </c:forEach>
         <c:if test="${endPage < pagesCount}">
@@ -156,6 +157,7 @@
     </nav>
   </div>
 </div>
+
 	</div>
 	
    </div>
@@ -164,9 +166,11 @@
 
 <%@include file="../include/foot.jspf"%>
 <script>
-   window.onload=function(){
-      bookMarkList();
-      checkedBookMark("/dagachi/proceeding/list");
-   }
-   
+
+
+window.addEventListener('load', function(){
+     checkedBookMark("/dagachi/proceeding/list");
+      
+   })
+
 </script>

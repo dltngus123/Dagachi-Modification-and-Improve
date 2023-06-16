@@ -36,25 +36,25 @@
 <c:forEach var="article" items="${board}">
     <textarea class="content summernote" name="content" id="content_${article.article_id}" readonly>${article.article_body}</textarea>
     <table class="table w-full" >
-			    <tr>
-			        <th style="text-align: start;">첨부파일</th>
-			        <td style="text-align: start;"  >
-			        <c:if test="${article.article_attach != null}">
-			          <a class="border border-current p-2 " href="<%=request.getContextPath() %>/article/download?article_id=${article.article_id}" download="${article.article_attach}"> 💾${article.article_attach}</a>
-					</c:if>
-					<c:if test="${article.article_attach = null}">
-			          <a class="border border-current p-2 " href="<%=request.getContextPath() %>/article/download?article_id=${article.article_id}" download="${article.article_attach}"> ${article.article_attach}</a>
-					</c:if>
-			        </td>
-			    </tr>
-			</table>
+             <tr>
+                 <th style="text-align: start;">첨부파일</th>
+                 <td style="text-align: start;"  >
+                 <c:if test="${article.article_attach != null}">
+                   <a class="border border-current p-2 " href="<%=request.getContextPath() %>/article/download?article_id=${article.article_id}" download="${article.article_attach}"> 💾${article.article_attach}</a>
+               </c:if>
+               <c:if test="${article.article_attach = null}">
+                   <a class="border border-current p-2 " href="<%=request.getContextPath() %>/article/download?article_id=${article.article_id}" download="${article.article_attach}"> ${article.article_attach}</a>
+               </c:if>
+                 </td>
+             </tr>
+         </table>
 
 
          <c:if test="${loginUser.member_id eq  article.article_register }">
          <input type="hidden" name="article_id" value="${article.article_id }">
                <span style="float: right;">
                   <button onclick="modify();"
-                	  class="btn btn-sidebar bg-blue-300" 
+                     class="btn btn-sidebar bg-blue-300" 
                      style="width: 100px;">수정</button>
                <script>
                    function confirmDelete() {
@@ -108,6 +108,7 @@ function modify(){
                 toolbar: [], 
                 disableResizeEditor: true 
             });
+            $('.summernote').summernote('disable');
         });
     });
 </script>

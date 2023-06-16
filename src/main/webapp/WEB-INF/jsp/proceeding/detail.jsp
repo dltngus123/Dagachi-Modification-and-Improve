@@ -5,63 +5,69 @@
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../include/head.jspf"%>
 <div class="p-4 sm:ml-64">
-   
-   <h1>
-   <i class="fas fa-star text-yellow"></i>
-      회의록
+      <div class="content-header">
+   <h1 class="text-3xl mb-5">
+      회의록 상세
    </h1>
+   </div>
+
    <div class="col-12">
      <div class="card">
-       <div class="card-header row">
+      
+     <section class="w-2/3 mx-auto content-body">
+
+        <div class="mt-4">
+
+            <div class="card-header flex">
          <!-- <h3 class="card-title"></h3> -->
-         <h3 class="row ml-4 text-bold">
+         <div class="mr-2 w-1/6 font-bold">회의록 제목</div>
+         <h3 class="flex text-lg">
               ${proceeding.form_proceeding_title }
            </h3>
    
-
      </div>
-     <section class="col-11 mx-auto content-body">
-        
-        
-        
-        <div class="mt-4">
+      <hr />
 
-           
-
-           <div class="row mt-2">
-           <label for="" class="col-sm-2">등록 일자</label>
+           <div class="flex mt-2 items-center">
+           <label for="" class="w-1/6 mr-2 font-bold">등록 일자</label>
            <fmt:formatDate value="${proceeding.form_proceeding_regDate }" pattern="yyyy.MM.dd" var="regDate"/>
-               <input class="form-control col-sm-6"type="text" value="${regDate }" disabled="disabled"/>
+               <div >${regDate } </div>
            
            </div>
-           <div class="row mt-2">
-              <label for="" class="col-sm-2 mr-2">등록자*</label>
-              <div class="col-sm-6 row">
-                 <div class="col-sm-1 manPicture" data-id="${proceeding.form_proceeding_register }"></div>
-                 <div class="col-sm-9">
+           <hr />
+           <div class="flex mt-2 items-center">
+              <label for="" class="w-1/6 mr-2 font-bold" >등록자</label>
+              <div class="w-1/2 flex items-center">
+                 <div class="col-sm-9 text-lg">
                  ${member.member_name}
                  </div>
+                 <div class="w-1/3 h-12 manPicture" data-id="${proceeding.form_proceeding_register}"></div>
+
               </div>
             </div>
-            <div class="row mt-2">
-               <label for="" class="col-sm-2">희의 주제*</label>
-               <input class="col-sm-6 form-control" type="text" value="${proceeding.form_proceeding_topic }" disabled="disabled"/>
+              <hr />
+            <div class="flex mt-2">
+               <label for="" class="w-1/6 font-bold mr-2">희의 주제</label>
+               <div class="w-1/2 text-lg">${proceeding.form_proceeding_topic }</div>
             </div>
+            <hr />
            
-           
-           <label for="" class="mt-4">회의내용</label>   
-           <div class="contentbox row col-sm-12">
+           <br />
+           <label for="" class=" font-bold">회의내용</label>   
+           <div class="contentbox flex col-sm-12">
             <textarea class="content summernote mx-auto" name="content" id="content" disabled="disabled">
                ${proceeding.form_proceeding_body }
             </textarea>
             </div>
+            <hr />
 
-           <label for="" class="mt-4">회의결론</label>   
-           <div class="contentbox row col-sm-12 ">
+           <label for="" class="mt-4 font-bold">회의결론</label>   
+           <div class="contentbox flex col-sm-12 ">
             <textarea class="content summernote mx-auto" name="content" id="content" disabled="disabled">
                ${proceeding.form_proceeding_result }
             </textarea>
             </div>
+            <hr />
            
            
            
@@ -70,10 +76,10 @@
         </div>
      </section>
        <div class="text-center my-4">
-        <button type="button" class="btn bg-gradient col-sm-2" onclick="" 
-        style="background: #5865F2; color:#ffffff;">내려받기</button>
-        <button type="button" class="btn bg-gradient col-sm-2" onclick="history.back();" 
-        style="background: #5865F2; color:#ffffff;">뒤로가기</button>
+        <button type="button" class="btn bg-blue-300 col-sm-2" onclick="" 
+         color:#ffffff;">내려받기</button>
+        <button type="button" class="btn bg-gray-400 col-sm-2" onclick="history.back();" 
+        style=" color:#ffffff;">뒤로가기</button>
         
      </div>
    </div>
@@ -122,16 +128,20 @@ window.onload=function(){
       }
 
 
-function MemberPictureThumb(contextPath){
-    for(var target of document.querySelectorAll('.manPicture')){   
-       var id = target.getAttribute('data-id');
-       
-      target.style.backgroundImage="url('"+contextPath+"/dagachi/proceeding/getPicture?id="+id+"')";            
-      target.style.backgroundPosition="center";
-      target.style.backgroundRepeat="no-repeat";
-      target.style.backgroundSize="contain";
-    }
-}
+function MemberPictureThumb(contextPath) {
+   
+      for (var target of document.querySelectorAll('.manPicture')) {
+         var id = target.getAttribute('data-id');
+
+         target.style.backgroundImage = "url('" + contextPath + "/dagachi/proceeding/getPicture?id=" + id + "')";
+         target.style.backgroundPosition = "center";
+         target.style.backgroundRepeat = "no-repeat";
+         target.style.backgroundSize = "contain";
+      }
+   }
+
+
+
 </script>
 <script>
 function summernote_go(target,context){
