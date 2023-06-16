@@ -71,19 +71,6 @@
 </div>
 
 <script>
-function removeAttachment(event) {
-    var attachmentElement = event.target.parentElement;
-    attachmentElement.remove();
-
-    
-    document.getElementById("article_attach").value = null;
-
-  
-    document.getElementById("article_attach").setAttribute(null);
-}
-
-
-
     function modify() {
         var articleTitle = document.getElementById("article_title").value;
         var articleBody = $('.summernote').summernote('code');
@@ -113,7 +100,9 @@ function removeAttachment(event) {
                 article_id: articleId
             },
             success: function (response) {
-              
+                if (articleAttach === "") {
+                    articleAttach = null;
+                }
                 window.location.href = "/notice/noticeList";
             }
         });
@@ -126,7 +115,16 @@ function removeAttachment(event) {
 
    
 
-  
+    function removeAttachment(event) {
+        var attachmentElement = event.target.parentElement;
+        attachmentElement.remove();
+
+        
+        document.getElementById("article_attach").value = "";
+
+      
+        document.getElementById("article_attach").setAttribute("value", "");
+    }
 </script>
 
 <%@include file="/WEB-INF/jsp/include/foot.jspf" %>

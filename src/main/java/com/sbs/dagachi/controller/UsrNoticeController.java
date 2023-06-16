@@ -130,9 +130,9 @@ public class UsrNoticeController {
 	@ResponseBody
 	public String articleModify(HttpSession session,@RequestParam("article_title")String article_title,@RequestParam("article_body")String article_body,@RequestParam(value = "article_attach", required = false)String article_attach,@RequestParam("article_id")String article_id) {
 		
-		if (article_attach == "") {
-			return article_attach = null;
-		}
+		if (article_attach != null && article_attach.isEmpty()) {
+	        article_attach = null;
+	    }
 		
 		articleService.articleModify(article_title, article_body, article_attach, article_id);
 		
