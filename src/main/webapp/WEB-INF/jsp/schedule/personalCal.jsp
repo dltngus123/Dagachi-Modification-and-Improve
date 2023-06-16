@@ -287,8 +287,8 @@
 
 <div class="p-4 sm:ml-64">
 <div>
-<div class="content-header">
-	    		<h1>
+<div class="content-header mb-6">
+	    		<h1 class="text-3xl">
    <a href='javascript:registBookMark("/schedule/personalCal", "개인 일정")'>
    <i class="fas fa-star bookmarkCheck"></i>
    </a>

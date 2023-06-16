@@ -4,18 +4,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@include file="/WEB-INF/jsp/include/head.jspf" %>
+
 <script>
-   window.onload=function(){
-      bookMarkList();
-      checkedBookMark("/article/list");
-   }
+   
+   window.addEventListener('load', function(){
+        checkedBookMark("/article/list");
+         
+      })
    
 </script>
+
 <div class="p-4 sm:ml-64">
 
-<div class="col-md-12">
+<div class="content-header mb-4">
 <div class="content-header">
-<h1>
+<h1 class="text-3xl">
    <a href='javascript:registBookMark("/article/list", "공유게시판 조회")'>
    <i class="fas fa-star bookmarkCheck"></i>
    </a>
@@ -25,23 +28,25 @@
    </h1>
 </div>
 </div>
-<div class="col-md-12" style="display:flex;">
-<div class="col-md-6">
-   <button onclick="write_go();" class="btn btn-default col-sm-2" style="background-color:#5865F2; color:white;">글작성</button>
+<div class="flex justify-between" >
+<div class="w-1/2">
+   <button onclick="write_go();" class="btn btn-sm bg-blue-400 text-white" >글작성</button>
 </div>
-<div class="col-md-6">
- <form class="row" style="text-align:right;margin-right:10px;">
+<div class="w-1/2 flex justify-end">
+ <form class="flex w-full justify-end" style="">
+  <div class="w-full flex justify-end input-bordered" >
         <input type="hidden" name="article_id" value="${param.article_id}"/>
-           <select name="searchKeywordTypeCode" data-value="${param.searchKeywordTypeCode }" id="" class="select select-bordered col-sm-3 form-control">
-              <option disabled="disabled">검색타입</option>
-              <option value="article_title">제목</option>
-              <option value="article_regdate">작성일</option>
-              <option value="article_register">작성자</option>
+           <select name="searchKeywordTypeCode" data-value="${param.searchKeywordTypeCode }" id="" class="input-sm w-1/5 input input-bordered ">
+               <option disabled="disabled">검색타입</option>
+              <option value="article_title" ${param.searchType=='article_title'? 'selected':'' }>제목</option>
+              <option value="article_regdate" ${param.searchType=='article_regdate'? 'selected':'' }>작성일</option>
+              <option value="article_register" ${param.searchType=='article_register'? 'selected':'' }>작성자</option>
            </select>
-        <input name="searchKeyword" type="text" class="col-sm-8 form-control" placeholder="검색어" maxlength="20" value="${param.searchKeyword }" />
-            <button type="submit" class="btn btn-default form-control col-sm-1">
-            	<i class="fas fa-search"></i>
+        <input name="searchKeyword" type="text" class="w-3/5 input input-bordered input-sm" placeholder="검색어" maxlength="20" value="${param.searchKeyword }" />
+            <button type="submit" class="w-1/8 bg-blue-300 btn-sm btn">
+            	<i class="fas fa-search text-lg"></i>
             </button>
+            </div>
      </form>
 </div>
 </div>
@@ -63,7 +68,7 @@
          <td>${article.article_id }</td>
          <td><a href="/article/detail?article_id=${article.article_id }" >${article.article_title}</a></td>   
          <td><c:if test="${article.article_attach != null}">
-               <i class="fa fa-file"></i>
+                <div class="">💾</div>
             </c:if>
          </td>
          <td>${article.article_regdate.substring(0, 11) }</td>
@@ -73,14 +78,14 @@
    </tbody>
 </table>
 </div>
-   <div class="row">
+      <div class="">
   <div class="col">
     <nav aria-label="Contacts Page Navigation">
       <c:set var="pageMenuArmLen" value="4" />
       <c:set var="startPage" value="${page - pageMenuArmLen < 1 ? 1 : page - pageMenuArmLen}" />
       <c:set var="endPage" value="${page + pageMenuArmLen > pagesCount ? pagesCount : page + pageMenuArmLen}" />
-      <c:set var="pageBaseUri" value="boardId=${article.board_Id}&searchKeyword=${param.searchKeyword}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
-      <ul class="pagination justify-content-center m-0">
+      <c:set var="pageBaseUri" value="boardId=${article.board_id}&searchKeyword=${param.searchKeyword}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
+      <ul class="pagination flex justify-center m-0">
         <c:if test="${startPage > 1}">
           <li class="page-item">
             <a class="page-link btn btn-sm" href="?${pageBaseUri}&page=1">1</a>
@@ -92,8 +97,8 @@
           </c:if>
         </c:if>
         <c:forEach begin="${startPage}" end="${endPage}" var="i">
-          <li class="page-item ${param.page == i ? 'active' : ''}">
-            <a class="page-link btn btn-sm" href="?${pageBaseUri}&page=${i}">${i}</a>
+          <li class="page-item">
+            <a class="page-link btn btn-sm  ${param.page == i ? 'btn-active' : ''}" href="?${pageBaseUri}&page=${i}">${i}</a>
           </li>
         </c:forEach>
         <c:if test="${endPage < pagesCount}">

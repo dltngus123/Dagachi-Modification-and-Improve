@@ -2,33 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sbs.dagachi.repository.MemberRepository">
-	<select id="getMember" resultType="Member">
-		SELECT *
-		FROM MEMBER
-	
-	
-	</select>
-		
-	<select id="getMemberById" resultType="Member">
-	SELECT *
-	FROM MEMBER
-	WHERE member_id = #{member_id}
-	</select>
-	
-		<select id="getMemberByName" resultType="Member">
-	SELECT *
-	FROM MEMBER
-	WHERE member_name = #{member_name}
+   <select id="getMember" resultType="Member">
+      SELECT *
+      FROM MEMBER
+   
+   
+   </select>
+      
+   <select id="getMemberById" resultType="Member">
+   SELECT *
+   FROM MEMBER
+   WHERE member_id = #{member_id}
+   </select>
+   
+      <select id="getMemberByName" resultType="Member">
+   SELECT *
+   FROM MEMBER
+   WHERE member_name = #{member_name}
 </select>
 
-	
-	<select id="getMembersNameByteam" resultType="Member">
-		SELECT *
-		FROM MEMBER
-		WHERE member_team1 = #{member_team1} AND member_rank != "사원"
-	</select>
-	
-	<select id="getMembername" resultType="member">
+   
+   <select id="getMembersNameByteam" resultType="Member">
+      SELECT *
+      FROM MEMBER
+      WHERE member_team1 = #{member_team1} AND member_rank != "사원"
+   </select>
+   
+   <select id="getMembername" resultType="member">
     SELECT * 
     FROM member 
     WHERE member_name = #{member_name}
@@ -50,8 +50,8 @@
 
 <update id="updateMemberStatus">
 update member
-		set member_status=#{member_status}
-		where member_id=#{member_id}
+      set member_status=#{member_status}
+      where member_id=#{member_id}
 </update>
 
 <insert id="registMember">
@@ -65,7 +65,7 @@ update member
          
    </insert>
    
-   <select id="almostName" resultType="member">
+   <select id="almostName" resultType="Member">
     SELECT * 
     FROM member 
     WHERE member_name like concat('%',#{member_name},'%') 
@@ -76,11 +76,23 @@ update member
    FROM MEMBER
   where member_name=#{name} AND member_email=#{email}
    </select>
- 	<select id="findPwd" resultType="Member">
- 	SELECT *
- 	FROM MEMBER
- 	where member_id=#{id} AND member_name=#{name}
+    <select id="findPwd" resultType="Member">
+    SELECT *
+    FROM MEMBER
+    where member_id=#{id} AND member_name=#{name}
 
-	 </select>
+    </select>
+    
+    
+   <select id="searchMember" resultType="Member">
+      select *
+      from member
+      <if test="searchType=='name'">
+         where member_name like concat('%',#{keyword},'%')
+      </if>
+      <if test="searchType=='dep'">
+         where member_department1 like concat('%',#{keyword},'%')
+      </if>
+   </select>
  
 </mapper>

@@ -2,16 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/WEB-INF/jsp/include/head.jspf"%>
-<script>
-   window.onload=function(){
-      bookMarkList();
-      checkedBookMark("/dagachi/phoneBook/companyPhoneBookList");
-   }
-   
-</script>
- <div class="p-4 sm:ml-64">
-   <div class="content-header">
-   <h1>
+
+   <div class="p-4 sm:ml-64">
+   <div class="content-header mb-4">
+   <h1 class="text-3xl">
    <a href='javascript:registBookMark("/dagachi/phoneBook/companyPhoneBookList", "사내 주소록")'>
    <i class="fas fa-star bookmarkCheck"></i>
    </a>
@@ -22,28 +16,29 @@
    </div>
    <div class="col-12">
      <div class="card">
-       <div class="card-header row">
+       <div class="card-header flex justify-between">
          <!-- <h3 class="card-title"></h3> -->
          <div class="btns col-sm-6">
-             <button type="button" class="btn bg-gradient" style="background: #5865F2; color:#ffffff;" onclick="OpenWindow('memberRegist','신규사원',800,900);">신규 사원 등록</button>
+             <button type="button" class="btn btn-sm bg-blue-400" style="color:#ffffff;" onclick="OpenWindow('memberRegist','신규사원',800,900);">신규 사원 등록</button>
          </div>
-         <div class="card-tools col-sm-6">
+         <div class="card-tools w-1/3">
            <form action="" class="">
-           <div class="input-group input-group-sm ">
-             <select name="searchType">
+           <div class="input-group input-group-sm w-full">
+             <select name="searchType" class="w-1/4">
                 <option value="" disabled="disabled" selected="selected">검색구분</option>
-                <option value="name">이름</option>
-                <option value="dep">부서</option>
+                <option value="name" ${param.searchType=='name'? 'selected':'' }>이름</option>
+                <option value="dep" ${param.searchType=='dep'? 'selected':'' }>부서</option>
              </select>
              <input
                type="text"
                name="keyword"
-               class="form-control float-right"
+               class="w-1/2"
                placeholder="Search"
+               value="${param.keyword }"
              />
           
              <div class="input-group-append">
-               <button type="submit" class="btn btn-default">
+               <button type="submit" class="btn btn-sm">
                  <i class="fas fa-search"></i>
                </button>
              </div>
@@ -126,5 +121,7 @@ function deleteChecked(){
 
 window.onload=function(){
    MemberPictureThumb('<%=request.getContextPath()%>');
+   checkedBookMark("/dagachi/phoneBook/companyPhoneBookList");
+   bookMarkList();
 }
 </script>

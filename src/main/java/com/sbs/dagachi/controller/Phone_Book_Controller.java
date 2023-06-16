@@ -115,8 +115,8 @@ public class Phone_Book_Controller {
    
    
    @RequestMapping("dagachi/phoneBook/companyPhoneBookList")
-   public String showCompanyPhoneBookList(Model model) {
-      List<Member>companyPhoneBookList=memberService.getMember();
+   public String showCompanyPhoneBookList(Model model, String searchType, String keyword) {
+      List<Member>companyPhoneBookList=memberService.searchMember(searchType, keyword);            
       model.addAttribute("companyPhoneBookList",companyPhoneBookList);
       return "phoneBook/companyPhoneBookList";
    }

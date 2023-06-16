@@ -3,16 +3,10 @@
 <c:set var="pageTitle" value="공용캘린더" />
 <%@include file="../include/head.jspf"%>
 
-  <!-- jquery CDN -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- fullcalendar CDN -->
-  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
-  <!-- fullcalendar 언어 CDN -->
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.min.js'></script>
-  <!-- moment?쓰려고 가져옴 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
 <script>
+
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -29,22 +23,22 @@ document.addEventListener('DOMContentLoaded', function() {
       locale: 'ko',
       selectMirror: true,
       select: function(arg) {
-    	  var title = prompt('Event Title:');
-    	  if (title) {
-    	    var schedule_code = arg.schedule_code;
-    	    var title = arg.title;
-    	    var content = arg.content;
-    	    var start = arg.start;
-    	    var end = arg.end;
-    	    var writer = arg.writer;
-    	    // Prompt the user for the schedule_code value
-    	    var schedule_code = prompt('schedule_code:');
+         var title = prompt('Event Title:');
+         if (title) {
+           var schedule_code = arg.schedule_code;
+           var title = arg.title;
+           var content = arg.content;
+           var start = arg.start;
+           var end = arg.end;
+           var writer = arg.writer;
+           // Prompt the user for the schedule_code value
+           var schedule_code = prompt('schedule_code:');
           // Send the event data to the server and save it in the database
           $.ajax({
             url: '/getCommonlCalendar',
             method: 'GET',
             data: {
-            	schedule_code : arg.schedule_code,
+               schedule_code : arg.schedule_code,
                 title : arg.title,
                 content : arg.content,
                 start : arg.start,
@@ -54,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             success: function(response) {
               // If the event is saved successfully, add it to the calendar
               var eventData = JSON.parse(response);
-			
+         
             },
             error: function() {
               alert('저장 실패.');
@@ -72,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var loginUser = '${loginUser.member_id}';
             var events = data.map(function(event) {
             var eventData = {
-            	schedule_code:event.schedule_code,
+               schedule_code:event.schedule_code,
                 title: event.title,
                 content:event.content,
                 start: event.start,
@@ -92,14 +86,16 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
       },
+      
       customButtons: {
         addEventButton: {
           text: '일정 추가',
           click: function() {
-              // Server-side condition
+        	  
+
               var memberAuth = ${loginUser.member_auth};
               if (memberAuth !== 1) {
-                $("#calendarModal").modal("show");
+                $("#calendarModal").ShowModal("show");
               } else {
                 $("#calendarModal").modal("hide");
                 alert("공용 일정 등록 권한이 없습니다.");
@@ -131,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
          $("#deleteButton").click(function() {
              if (confirm("정말 삭제하시겠습니까?")) {
                 
-            	  $("#schedule_code").val(eventData.schedule_code);
+                 $("#schedule_code").val(eventData.schedule_code);
 
                  $.ajax({
                      url: "<%=request.getContextPath()%>/schedule/delete",
@@ -147,37 +143,37 @@ document.addEventListener('DOMContentLoaded', function() {
                  });
              }
          });
-   		
+         
 
          // Show the modal
          $("#calendarDetailModal").modal("show");
          
          //수정
-	 $("#modifyButton").click(function() {
-	  // Get the event data
-	
-	  // Set the values in the calendarModifyModal inputs
-	  $("#schedule_title_modify").val(event.title);
-	  $("#schedule_content_modify").val(eventData.content);
-	  $("#schedule_start_modify").val(startFormatted);
-	  $("#schedule_end_modify").val(endFormatted);
-	  $("#schedule_code").val(eventData.schedule_code);
-	  
-	  // Get the schedule_code value
-	  var schedule_code = $("#schedule_code").val();
+    $("#modifyButton").click(function() {
+     // Get the event data
+   
+     // Set the values in the calendarModifyModal inputs
+     $("#schedule_title_modify").val(event.title);
+     $("#schedule_content_modify").val(eventData.content);
+     $("#schedule_start_modify").val(startFormatted);
+     $("#schedule_end_modify").val(endFormatted);
+     $("#schedule_code").val(eventData.schedule_code);
+     
+     // Get the schedule_code value
+     var schedule_code = $("#schedule_code").val();
 
             // Show the calendarModifyModal
-            $("#calendarModifyModal").modal("show");
+            $("#calendarModifyModal").modal('show');
             
             $("#confirmModifyButton").click(function(e) {
-            	e.stopPropagation()
+               e.stopPropagation()
                 // Get the updated values from the calendarModifyModal inputs
                 var title = $("#schedule_title_modify").val();
                 var content = $("#schedule_content_modify").val();
                 var start = $("#schedule_start_modify").val();
                 var end = $("#schedule_end_modify").val();
                 var scheduleCode = $("#schedule_code").val();
-				
+            
                 
                 // Construct the data object to be sent to the server
                 var updatedData = {
@@ -236,12 +232,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 url: '<%=request.getContextPath()%>/schedule/common/saveEvent',
                 method: 'POST',
                 data: {
-                	title : title,
-                	content : content,
-                	start : start,
-                	end : end,
-                	register : register,
-                	regtime : regtime
+                   title : title,
+                   content : content,
+                   start : start,
+                   end : end,
+                   register : register,
+                   regtime : regtime
                 },
                 success: function(response) {
                     if (response === "success") {
@@ -286,15 +282,19 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
    window.onload=function(){
       bookMarkList();
-      checkedBookMark("/schedule/commonCal");
    }
+   
+   window.addEventListener('load', function(){
+     checkedBookMark("/schedule/commonCal");
+      
+   })
    
 </script>
 
-<div class="p-4 sm:ml-64">
+<div class="p-4 sm:ml-64" style="background-color:white;">
 <div>
-<div class="content-header">
-	   		    	<h1>
+<div class="content-header mb-6">
+                   <h1 class="   text-3xl">
    <a href='javascript:registBookMark("/schedule/commonCal", "사내 일정")'>
    <i class="fas fa-star bookmarkCheck"></i>
    </a>
@@ -307,9 +307,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   <div id="calendar" class="mx-auto" style="max-height: 600px; max-width:1000px;" ></div>
- 
+  
 
-<div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+   
+<div class="modal fade" id="calendarModal" data-modal-show="true" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

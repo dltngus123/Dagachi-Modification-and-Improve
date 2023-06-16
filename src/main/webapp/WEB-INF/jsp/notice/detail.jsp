@@ -8,23 +8,23 @@
 
 <div class="p-4 sm:ml-64">
     <div class="col-md-12" style="text-align:right; margin-top:15px; margin-bottom:15px;">
-        <button class="btn btn-sidebar" style="background-color: #D7D7D7; width: 100px; "><a href="/notice/noticeList">목록</a></button>
+        <button class="btn btn-sidebar bg-gray-300" style="width: 100px; "><a href="/notice/noticeList">목록</a></button>
     </div>
     <div class="col-md-12" style="text-align:center;">
         <table class="table w-full">
             <thead>
                 <c:forEach var="article" items="${board}">
                     <tr>
-                        <th>공지사항 제목</th>
-                        <td style="background-color:white;">${article.article_title}</td>
+                        <th class="font-bold text-lg text-black">공지사항 제목</th>
+                        <td class="font-bold text-lg" style="background-color:white;">${article.article_title}</td>
                     </tr>
                     <tr>
-                        <th>작성자</th>
-                        <td style="background-color:white;">${article.member_name }(${article.member_rank })/${article.member_department1 }&nbsp;&nbsp;${article.member_team1 }</td>
+                        <th class="font-bold text-lg text-black">작성자</th>
+                        <td class="font-bold text-lg" style="background-color:white;">${article.member_name }(${article.member_rank })/${article.member_department1 }&nbsp;&nbsp;${article.member_team1 }</td>
                     </tr>
                     <tr>
-                        <th>등록일</th>
-                        <td style="background-color:white;">${article.article_regdate.substring(0, 11) }</td>
+                        <th class="font-bold text-lg text-black">등록일</th>
+                        <td class="font-bold text-lg" style="background-color:white;">${article.article_regdate.substring(0, 11) }</td>
                     </tr>
                 </c:forEach>
             </thead>
@@ -32,12 +32,16 @@
         <div class="contentbox">
             <c:forEach var="article" items="${board}">
                 <textarea class="content summernote" name="content" id="content_${article.article_id}" readonly>${article.article_body}</textarea>
-              <table class="table w-full">
+              <table class="table w-full" >
 			    <tr>
 			        <th style="text-align: start;">첨부파일</th>
-			        <td style="text-align: start;">
-			          <a href="<%=request.getContextPath() %>/notice/download?article_id=${article.article_id}" download="${article.article_attach}">${article.article_attach}</a>
-			
+			        <td style="text-align: start;"  >
+			        <c:if test="${article.article_attach != null}">
+			          <a class="border border-current p-2 " href="<%=request.getContextPath() %>/notice/download?article_id=${article.article_id}" download="${article.article_attach}"> 💾${article.article_attach}</a>
+					</c:if>
+					<c:if test="${article.article_attach = null}">
+			          <a class="border border-current p-2 " href="<%=request.getContextPath() %>/notice/download?article_id=${article.article_id}" download="${article.article_attach}"> ${article.article_attach}</a>
+					</c:if>
 			        </td>
 			    </tr>
 			</table>
@@ -45,7 +49,7 @@
                 <c:if test="${loginUser.member_id eq  article.article_register }">
                     <input type="hidden" name="article_id" value="${article.article_id }">
                     <span style="float: right;">
-                        <button onclick="modify();" class="btn btn-sidebar" style="background-color: #5865F2; width: 100px;">수정</button>
+                        <button onclick="modify();" class="btn btn-sidebar bg-blue-300" style=" width: 100px;">수정</button>
                         <script>
                             function confirmDelete() {
                                 if (confirm('정말 삭제하시겠습니까?')) {
@@ -63,7 +67,7 @@
                                 }
                             }
                         </script>
-                        <button onclick="confirmDelete();" class="btn btn-sidebar" style="background-color: #DC3545; width: 100px;">삭제</button>
+                        <button onclick="confirmDelete();" class="btn btn-sidebar bg-red-500" style=" width: 100px;">삭제</button>
                     </span>
                 </c:if>
             </c:forEach>

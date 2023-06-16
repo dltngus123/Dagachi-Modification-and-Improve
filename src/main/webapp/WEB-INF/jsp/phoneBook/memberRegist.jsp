@@ -3,16 +3,16 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="/WEB-INF/jsp/include/openhead.jspf"%>
-   <div class="wrapper col-12" style="background: #f9f9f9;">
-   <section class="content-header">
+   <div class="wrapper col-12 mx-auto" style="background: #f9f9f9; max-width:800px;">
+   <section class="content-header p-4">
         <div class="container-fluid">
-           <div class="row">
-              <div class="col-sm-6">
+           <div class="flex">
+              <div class="w-1/2 text-3xl">
                  <h1>신규사원 등록</h1>              
               </div>
-              <div class="col-sm-6">
-                 <ol class="breadcrumb float-sm-right">
-                 <li class="breadcrumb-item">
+              <div class="w-1/2 text-lg">
+                 <ol class="breadcrumb float-right flex">
+                 <li class="breadcrumb-item mr-4">
                     <a href="#">
                        <i class="fa fa-dashboard">주소록</i>
                     </a>
@@ -24,14 +24,14 @@
               </div>
            </div>
         </div>
-        <hr/>
      </section>
+     <hr />
      
-        <div id="pictureView" class="border col-sm-3 mx-auto mb-2" style="height:200px;"></div>
-      <div class="row col-sm-10 mx-auto">
-         <label for="inputFile" class=" btn bg-primary btn-sm btn-flat col-sm-3">이미지 선택</label>
-          <input id="inputFileName" class="col-sm-6 form-control mr-2" type="text" name="tempPicture" disabled/>
-           <label class="btn bg-primary col-sm-2" onclick="upload_go();">업로드</label>
+        <div id="pictureView" class="border w-1/3 mx-auto my-4 mb-2" style="height:250px;"></div>
+      <div class="flex w-5/6 mx-auto">
+         <label for="inputFile" class="btn bg-blue-300 btn-md w-1/4">이미지 선택</label>
+          <input id="inputFileName" class="w-1/2 mr-2 border rounded" type="text" name="tempPicture" disabled/>
+           <label class="btn bg-blue-300 btn-md w-1/6" onclick="upload_go();">업로드</label>
       </div>
      
      <form role="form" action="memberRegistSuccess">
@@ -39,61 +39,70 @@
         
         <div class="">
            <input type="hidden" name="member_pic" value="" />
-         <div class="row mt-2">
-              <label for="" class="col-sm-3">아이디*</label>
-              <input type="text" name="member_id" class="col-sm-6 form-control mr-2"/>
-              <button type="button" class="btn bg-primary col-sm-2 " onclick="idCheck();"> 중복확인</button>
+         
+         <div class="flex mt-2 w-5/6 mx-auto text-center">
+              <label for="" class="w-1/4 self-center font-bold text-lg">아이디</label>
+              <input type="text" name="member_id" class="w-1/2 mr-2 input input-bordered"/>
+              <button type="button" class="btn bg-blue-300 btn-md w-1/6 " onclick="idCheck();"> 중복확인</button>
               <input type="hidden" name="idCheck2" value="0" />
             </div>
-           <div class="row mt-2">
-              <label for="" class="col-sm-3">비밀번호*</label>
-              <input name="member_pwd" type="password" class="col-sm-6 form-control"/>
+            
+           <div class="flex mt-2 w-5/6 mx-auto text-center">
+              <label for="" class="w-1/4 self-center font-bold text-lg">비밀번호</label>
+              <input name="member_pwd" type="password" class="w-1/2 mr-2 input input-bordered"/>
               <input type="hidden" name="pwdCheck2" value="0" />
               
             </div>
-           <div class="row mt-2">
-              <label for="" class="col-sm-3">비밀번호 확인*</label>
-              <input name="pwd_check" type="password" class="col-sm-6 form-control" onchange="pwdCheck();"/>
+           <div class="flex mt-2 w-5/6 mx-auto text-center">
+              <label for="" class="w-1/4 self-center font-bold text-lg">비밀번호 확인</label>
+              <input name="pwd_check" type="password" class="w-1/2 mr-2 input input-bordered" onchange="pwdCheck();"/>
             </div>
-           <div class="row mt-2">
-              <label for="" class="col-sm-3">이름*</label>
-              <input name="member_name" type="text" class="col-sm-6 form-control"/>
+           <div class="flex mt-2 w-5/6 mx-auto text-center">
+              <label for="" class="w-1/4 self-center font-bold text-lg">이름</label>
+              <input name="member_name" type="text" class="w-1/2 mr-2 input input-bordered"/>
             </div>
 
-           <div class="row mt-2">
-           <label for="" class="col-sm-3">전화번호</label>
-           <select class="form-control col-sm-2 mr-2 phone" name="phone1" onchange="inputPhone();">
+           <div class="flex mt-2 w-5/6 mx-auto text-center">
+           <label for="" class="w-1/4 self-center font-bold text-lg">전화번호</label>
+           <div class="w-1/2 flex">
+           <select class="w-1/3 mr-2 input input-bordered phone" name="phone1" onchange="inputPhone();">
               <option value="010">010</option>
               <option value="011">011</option>
               <option value="016">016</option>
               <option value="017">017</option>
            </select>
-           <input name="phone2" type="text" class="col-sm-2 mr-2 form-control phone" onchange="inputPhone();"/>
-           <input name="phone3"type="text" class="col-sm-2 form-control phone" onchange="inputPhone();"/>
+           <input name="phone2" type="text" class="w-1/3 input input-bordered mr-1 phone" onchange="inputPhone();"/>
+           <input name="phone3"type="text" class="w-1/3 input input-bordered phone" onchange="inputPhone();"/>
+           </div>
            </div>
            
-           <div class="row mt-2">
-              <label for="" class="col-sm-3">이메일</label>
-              <input name="email1" type="text" class="col-sm-2 form-control" onchange="inputEmail();"/>&nbsp;@&nbsp;
-              <input name="email2" type="text" class="col-sm-3 form-control" onchange="inputEmail();"/>
+           <div class="flex mt-2 w-5/6 mx-auto text-center">
+              <label for="" class="w-1/4 self-center font-bold text-lg">이메일</label>
+              <div class="w-1/2 flex">
+                 <input name="email1" type="text" class="w-1/2 input input-bordered mr-1" onchange="inputEmail();"/>
+                 <span class="self-center">@</span>
+                 <input name="email2" type="text" class="w-1/2 input input-bordered" onchange="inputEmail();"/>
+              </div>
             </div>
 
-           <div class="row mt-2">
-              <label for="" class="col-sm-3">부서 및 소속</label>
-              <select class="col-sm-3 form-control" name="member_dep" onchange="changeTeam(this.value)">
+           <div class="flex mt-2 w-5/6 mx-auto text-center">
+              <label for="" class="w-1/4 self-center font-bold text-lg">부서 및 소속</label>
+              <div class="w-1/2 flex">
+              <select class="w-1/2 input input-bordered mr-1" name="member_dep" onchange="changeTeam(this.value)">
                  <option value="$">부서 선택</option>
               <c:forEach var="dep" items="${depList }">
                  <option value="${dep.department_id }">${dep.department_name }</option>
               </c:forEach>
               </select>
-              <select id="teamList" name="member_team" class="col-sm-3 form-control">
+              <select id="teamList" name="member_team" class="w-1/2 input input-bordered">
                  
               </select>
+              </div>
             </div>
 
-           <div class="row mt-2">
-              <label for="" class="col-sm-3">직급</label>
-              <select class="form-control col-sm-3"name="member_rank">
+           <div class="flex mt-2 w-5/6 mx-auto text-center">
+              <label for="" class="w-1/4 self-center font-bold text-lg">직급</label>
+              <select class="w-1/2 mr-2 input input-bordered"name="member_rank">
                  <option value="부장">부장</option>
                  <option value="대리">대리</option>
                  <option value="사원">사원</option>
@@ -101,22 +110,22 @@
             </div>
             
            
-           <div class="row mt-2">
-              <label for="" class="col-sm-3">생년월일</label>
-              <input type="date" name="member_birth" class="col-sm-6 form-control"/>
+           <div class="flex mt-2 w-5/6 mx-auto text-center">
+              <label for="" class="w-1/4 self-center font-bold text-lg">생년월일</label>
+              <input type="date" name="member_birth" class="w-1/2 mr-2 input input-bordered"/>
             </div>
 
-           <div class="row mt-2">
-              <label for="" class="col-sm-3">주소</label>
-              <input type="text" name="member_address" class="col-sm-6 form-control"/>
+           <div class="flex mt-2 w-5/6 mx-auto text-center">
+              <label for="" class="w-1/4 self-center font-bold text-lg">주소</label>
+              <input type="text" name="member_address" class="w-1/2 mr-2 input input-bordered"/>
             </div>
            <br />
      
         </div>
      </section>
      
-     <div class="text-center mt-4">
-        <button type="button" class="btn bg-gradient col-sm-3" style="background: #5865F2; color:#ffffff;" onclick="registMember()">등록</button>
+     <div class="text-center my-4">
+        <button type="button" class="btn bg-blue-300 btn-md w-1/4" onclick="registMember()">등록</button>
      </div>
      
      </form>

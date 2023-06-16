@@ -5,9 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/head.jspf"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<link
-	href="/resource/bootstrap/plugins/summernote/summernote-bs4.min.css"
-	rel="stylesheet">
+
 
 <style>
 #approver {
@@ -414,7 +412,10 @@ function formChange(e) {
 	  $(target).summernote("code", inp.innerHTML);
 	}
 
-
+window.addEventListener('load', function(){
+    summernote_go($('.content'),'<%=request.getContextPath()%>');
+    $('.note-toolbar').addClass('hidden'); 
+  })
 
 </script>
 

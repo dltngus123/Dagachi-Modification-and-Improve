@@ -3,64 +3,69 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@include file="/WEB-INF/jsp/include/head.jspf" %>
-<link href="/resource/bootstrap/plugins/summernote/summernote-bs4.min.css" rel="stylesheet"/>
+
 
 <div class="p-4 sm:ml-64">
   <div class="col-md-12" style="text-align:right; margin-top:15px; margin-bottom:15px; background-color:white;">
-    <h1 style="text-align:left; background-color:white;">공지사항 등록</h1>
-    <button class="btn btn-sidebar" style="background-color: #D7D7D7; width: 100px;"><a href="/notice/noticeList">목록</a></button>
+    <h1 class="text-3xl" style="text-align:left; background-color:white;">공지사항 등록</h1>
+    <button class="btn btn-sidebar bg-gray-300" style=" width: 100px;"><a href="/notice/noticeList">목록</a></button>
   </div>
   <div class="col-md-12" style="text-align:center;">
     <table class="table w-full">
       <thead>
         <tr>
-          <th>공지사항 제목</th>
-          <td style="background-color:white;"><input type="text" placeholder="제목을 입력해 주세요" style="width:500px; border:none;" id="article_title"></td>
+          <th class="font-bold text-lg text-black">공지사항 제목</th>
+          <td style="background-color:white;"><input type="text" placeholder="제목을 입력해 주세요" class="input" style="width:500px; border:none;" id="article_title"></td>
         </tr>
         <tr>
-          <th>작성자</th>
-          <td style="background-color:white;">${loginUser.member_id}</td>
+          <th class="font-bold text-lg text-black">작성자</th>
+          <td style="background-color:white;" class="text-lg">${loginUser.member_name}</td>
+          
         </tr>
         <tr>
-          <th>등록일</th>
-          <td id="currentDate" style="background-color:white;"></td>
+          <th class="font-bold text-lg text-black">등록일</th>
+          <td id="currentDate" style="background-color:white;" class="text-lg"></td>
         </tr>
         <tr>
-          <th>중요도</th>
+          <th class="font-bold text-lg text-black">중요도</th>
           <td style="background-color:white;">
             <label>
-              <input type="radio" name="importance" onclick="updateImportance(1);" /> 중요
+              <input type="radio" name="importance" onclick="updateImportance(1);" class="radio mr-1"/><span class="text-lg mr-4 ">중요</span>
             </label>
             <label>
-              <input type="radio" name="importance" onclick="updateImportance(0);" /> 일반
+              <input type="radio" name="importance" onclick="updateImportance(0);"class="radio mr-1" /><span class="text-lg ">일반</span>
             </label>
             <input type="hidden" id="article_important" />
           </td>
         </tr>
       </thead>
     </table>
-    <div class="col-md-5" style="text-align:start; margin-left:250px;">
-      <label for="fileUpload" class="file-label" style="margin-left:15px;">파일 선택</label>
-      <input type="file" id="fileUpload" style="width:300px;" name="article_attach">
+
+    
+    <div class="text-left" >
+      <input type="file" id="fileUpload" style="width:300px;" name="article_attach" class="my-3">
     </div>
     <div class="contentbox">
       <textarea class="content summernote" name="content" id="content"></textarea>
       <span style="float: right;">
-       <button type="button" onclick="postArticle();" class="btn btn-sidebar" style="background-color: #5865F2; width: 100px;">등록</button>
-        <button onclick="history_back();" class="btn btn-sidebar" style="background-color: #DC3545; width: 100px;">취소</button>
+       <button type="button" onclick="postArticle();" class="btn btn-sidebar bg-blue-300" style=" width: 100px;">등록</button>
+        <button onclick="history.back();" class="btn btn-sidebar bg-red-500" style=" width: 100px;">취소</button>
       </span>
     </div>
   </div>
 </div>
 
 <%@include file="/WEB-INF/jsp/include/foot.jspf" %>
-
+ 
+  
 <script>
-  $(document).ready(function() {
+/* $(document).ready(function() {
     $('.summernote').summernote({
-      height: 500
+      height: 200,
+      
+      
     });
-  });
+  }); */
 
   var today = new Date();
   var formattedDate = today.toISOString().split('T')[0];
@@ -96,14 +101,19 @@
   }
 
   function generateDownloadName(originalName) {
-	  var extension = originalName.split('.').pop();
-	  var fileName = originalName.substring(0, originalName.lastIndexOf('.'));
-	  return fileName + '.' + extension;
-	}
+     var extension = originalName.split('.').pop();
+     var fileName = originalName.substring(0, originalName.lastIndexOf('.'));
+     return fileName + '.' + extension;
+   }
 
   var uploadedFiles = [];
   document.getElementById('fileUpload').addEventListener('change', function(event) {
     var files = event.target.files;
+
+    if (uploadedFiles.length > 0) {
+      alert('파일은 1개만 첨부 가능합니다.');
+      return;
+    }
 
     for (var i = 0; i < files.length; i++) {
       var file = files[i];
@@ -112,13 +122,13 @@
       var fileInfo = document.createElement('div');
       fileInfo.textContent = generateDownloadName(file.name);
       fileInfo.style.backgroundColor = 'white';
-      fileInfo.style.border = '1px solid black';
+      fileInfo.style.border = '1px solid';
       fileInfo.style.padding = '5px';
 
       var deleteButton = document.createElement('button');
       deleteButton.textContent = 'X';
       deleteButton.dataset.index = i;
-      deleteButton.classList.add('btn', 'btn-danger');
+      deleteButton.classList.add('btn', 'bg-red-500');
       deleteButton.style.marginLeft = '10px';
       deleteButton.style.marginTop = '10px';
 
@@ -136,4 +146,8 @@
   function updateImportance(value) {
     document.getElementById('article_important').value = value;
   }
+  window.addEventListener('load', function(){
+        summernote_go($('.content'),'<%=request.getContextPath()%>');
+        $('.note-toolbar').addClass('hidden'); 
+      })
 </script>
