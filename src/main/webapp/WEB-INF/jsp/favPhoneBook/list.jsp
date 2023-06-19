@@ -3,16 +3,19 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="../include/head.jspf"%>
+
+
 <script>
-   window.onload=function(){
-      bookMarkList();
-      checkedBookMark("/dagachi/favPhoneBook/favList");
-   }
+   
+   window.addEventListener('load', function(){
+        checkedBookMark("/dagachi/favPhoneBook/favList");
+         
+      })
    
 </script>
  <div class="p-4 sm:ml-64">
    <div class="content-header">
-  <h1>
+  <h1 class="text-3xl">
    <a href='javascript:registBookMark("/dagachi/favPhoneBook/favList", "중요 연락처")'>
    <i class="fas fa-star bookmarkCheck"></i>
    </a>
@@ -23,37 +26,14 @@
    </div>
 	<div class="col-12">
 	  <div class="card">
-	    <div class="card-header row">
+	    <div class="card-header flex ">
 	      <!-- <h3 class="card-title"></h3> -->
-	      <div class="btns col-sm-6">
-	      	<button type="button" class="btn bg-gradient" style="background: #5865F2; color:#ffffff;" onclick="removeChecked();">중요 주소록 해제</button>
+	      <div class="btns col-sm-6 my-4 w-1/2">
+	      	<button type="button" class="btn bg-blue-400 btn-sm " style="color:#ffffff;" onclick="removeChecked();">중요 주소록 해제</button>
 	      </div>
-	      <div class="card-tools col-sm-6">
-	        <form action="showList" class="">
-	        <div class="input-group input-group-sm ">
-	          <select name="searchType">
-	          	<option value="" disabled="disabled" selected="selected">검색구분</option>
-	          	<option value="name" ${searchType eq 'name' ? 'selected':'' }>이름</option>
-	          	<option value="dep" ${searchType eq 'dep' ? 'selected':'' }>부서</option>
-	          	<option value="tag" ${searchType eq 'tag' ? 'selected':'' }>태그</option>
-	          </select>
-	          <input
-	            type="text"
-	            name="keyword"
-	            class="form-control float-right"
-	            placeholder="Search"
-	            value="${keyword }"
-	          />
-	       
-	          <div class="input-group-append">
-	            <button type="button" class="btn btn-default" onclick="">
-	              <i class="fas fa-search"></i>
-	            </button>
-	          </div>
-	          <input type="hidden" name="phone_book_type" value="${param.phone_book_type }" />
-	        </div>
-	        </form>
-	      </div>
+
+
+	      
 	    </div> 
 	
 	    <div class="card-body table-responsive p-0">
@@ -77,7 +57,7 @@
 	           </td>
 	           
 	           <td>
-		           <a class="text-yellow" href="javascript:removeFavPhone('${sharePhone.fav_Phone_Book_Id }')">
+		           <a class="text-yellow-400" href="javascript:removeFavPhone('${sharePhone.fav_Phone_Book_Id }')">
 			           <i class="fas fa-star "></i>
 		           </a>
 	           </td>

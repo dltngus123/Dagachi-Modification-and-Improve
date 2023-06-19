@@ -5,27 +5,27 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="../include/head.jspf"%>
  <div class="p-4 sm:ml-64">
-   <div class="content-header">
-   <h1>
+   <div class="content-header mb-3">
+   <h1 class="text-3xl">
       <c:if test="${phoneBookType eq '1' }">
-      <a href='javascript:registBookMark("/dagachi/phoneBook/shiwList?phone_book_type=1", "공유 주소록")'>
-   <i class="fas fa-star bookmarkCheck"></i>
+      <a href='javascript:registBookMark("/dagachi/phoneBook/showList?phone_book_type=1", "공유 주소록")'>
+  <i class="fas fa-star bookmarkCheck"></i>
    </a>
       <span style="color: black;">
       공유 주소록
       </span>
       </c:if>
       <c:if test="${phoneBookType eq '2' }">
-      <a href='javascript:registBookMark("/dagachi/phoneBook/shiwList?phone_book_type=2", "개인 주소록")'>
-   <i class="fas fa-star bookmarkCheck"></i>
+      <a href='javascript:registBookMark("/dagachi/phoneBook/showList?phone_book_type=2", "개인 주소록")'>
+  <i class="fas fa-star bookmarkCheck"></i>
    </a>
       <span style="color: black;">
       개인 주소록
       </span>
       </c:if>
       <c:if test="${phoneBookType eq '3' }">
-      <a href='javascript:registBookMark("/dagachi/phoneBook/shiwList?phone_book_type=3", "주소록 휴지통")'>
-   <i class="fas fa-star bookmarkCheck"></i>
+      <a href='javascript:registBookMark("/dagachi/phoneBook/showList?phone_book_type=3", "주소록 휴지통")'>
+  <i class="fas fa-star bookmarkCheck"></i>
    </a>
       <span style="color: black;">
       주소록 휴지통
@@ -35,23 +35,23 @@
    </div>
    <div class="col-12">
      <div class="card">
-       <div class="card-header row">
+       <div class="card-header flex">
          <!-- <h3 class="card-title"></h3> -->
-         <div class="btns col-sm-6">
+         <div class="btns w-1/2">
          <c:if test="${phoneBookType ne '3' }">
-            <button type="button" class="btn bg-gradient" style="background: #5865F2; color:#ffffff;" onclick="OpenWindow('registForm','주소록 등록',800,800);">주소록 등록</button>
-            <button type="button" class="btn bg-gradient" style="background: #5865F2; color:#ffffff;" onclick="deleteChecked();">삭제</button>
+            <button type="button" class="btn bg-blue-400 btn-sm" style="color:#ffffff;" onclick="OpenWindow('registForm','주소록 등록',800,800);">주소록 등록</button>
+            <button type="button" class="btn bg-red-400 btn-sm" style="color:#ffffff;" onclick="deleteChecked();">삭제</button>
          </c:if>
         <c:if test="${phoneBookType eq '3' }">
-        <button type="button" class="btn bg-gradient" style="background: #5865F2; color:#ffffff;" onclick="recoveryPhoneBookCb(1)">공유 주소록 복구</button>
-        <button type="button" class="btn bg-gradient" style="background: #5865F2; color:#ffffff;" onclick="recoveryPhoneBookCb(2)">개인 주소록 복구</button>
-        <button type="button" class="btn bg-gradient" style="background: #5865F2; color:#ffffff;" onclick="eliminateChecked()">주소록 영구삭제</button>
+        <button type="button" class="btn bg-blue-400 btn-sm" style="color:#ffffff;" onclick="recoveryPhoneBookCb(1)">공유 주소록 복구</button>
+        <button type="button" class="btn bg-blue-400 btn-sm" style="color:#ffffff;" onclick="recoveryPhoneBookCb(2)">개인 주소록 복구</button>
+        <button type="button" class="btn bg-red-400 btn-sm" style="color:#ffffff;" onclick="eliminateChecked()">주소록 영구삭제</button>
            </c:if>            
          </div>
-         <div class="card-tools col-sm-6">
-           <form action="showList" class="">
-           <div class="input-group input-group-sm ">
-             <select name="searchType"class="select2 select2-hidden-accessible">
+         <div class="w-1/2 flex justify-end">
+           <form action="showList" class="flex  justify-end">
+           <div class="input-group input-bordered">
+             <select name="searchType"class="select2 select2-hidden-accessible input-sm input input-bordered ">
                 <option value="name" ${searchType eq 'name' ? 'selected':'' }>이름</option>
                 <option value="dep" ${searchType eq 'dep' ? 'selected':'' }>부서</option>
                 <option value="tag" ${searchType eq 'tag' ? 'selected':'' }>태그</option>
@@ -59,16 +59,14 @@
              <input
                type="text"
                name="keyword"
-               class="form-control float-right"
+               class="input-sm input input-bordered "
                placeholder="Search"
                value="${keyword }"
              />
           
-             <div class="input-group-append">
-               <button type="button" class="btn btn-default" onclick="">
-                 <i class="fas fa-search"></i>
-               </button>
-             </div>
+            <button type="submit" class="w-1/8 bg-blue-300 btn-sm btn rounded">
+            	<i class="fas fa-search text-lg"></i>
+            </button>
              <input type="hidden" name="phone_book_type" value="${param.phone_book_type }" />
              <input type="hidden" name="phone_book_register" value="${param.phone_book_register }" />
              
@@ -82,7 +80,7 @@
            <thead>
              <tr>
                 <th><input type="checkbox" name="all" class="check-all"/></th>
-                <th><i class="fas fa-star text-yellow"></i></th>
+                <th><i class="fas fa-star text-yellow-300"></i></th>
                <th>이름</th>
                  <th>전화번호</th>
                  <th>이메일</th>
@@ -142,7 +140,7 @@
       <c:set var="startPage" value="${page - pageMenuArmLen < 1 ? 1 : page - pageMenuArmLen}" />
       <c:set var="endPage" value="${page + pageMenuArmLen > pagesCount ? pagesCount : page + pageMenuArmLen}" />
       <c:set var="pageBaseUri" value="searchType=${param.searchType }&phone_book_type=${param.phone_book_type }&keyword=${param.keyword }&phone_book_register=${param.phone_book_register }" />
-      <ul class="pagination justify-content-center m-0">
+      <ul class="pagination flex justify-center m-0">
         <c:if test="${startPage > 1}">
           <li class="page-item">
             <a class="page-link btn btn-sm" href="?${pageBaseUri}&page=1">1</a>
@@ -290,7 +288,7 @@ function deleteChecked(){
    
 }
 
-window.onload=function(){
+window.addEventListener('load', function(){
    const favCheckArr=${favIdList};
    //alert(favCheckArr);
    const favClassNameArr=[];
@@ -300,13 +298,13 @@ window.onload=function(){
    }
    //alert(favClassNameArr);
    for(var j=0;j<favClassNameArr.length;j++){
-      var favClass=$(favClassNameArr[j]).addClass("text-yellow");
+      var favClass=$(favClassNameArr[j]).addClass("text-yellow-300");
       
    }
-   bookMarkList();
+ 
    checkedBookMark('/dagachi/phoneBook/showList?phone_book_type=1');
    
-} 
+}) 
 
 function eliminateChecked(){
    const arr=[]
@@ -343,8 +341,8 @@ function eliminateChecked(){
 function registFav(num){
    var classText=".fav"+num;
    
-   if($(classText).is(".text-yellow")){
-      $(classText).removeClass("text-yellow");
+   if($(classText).is(".text-yellow-300")){
+      $(classText).removeClass("text-yellow-300");
       $.ajax({
          url: "removeFav",
          type: "post",
@@ -359,7 +357,7 @@ function registFav(num){
       
       })
    }else{
-      $(classText).addClass("text-yellow");
+      $(classText).addClass("text-yellow-300");
       $.ajax({
          url: "registFav",
          type: "post",
