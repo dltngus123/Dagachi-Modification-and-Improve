@@ -8,35 +8,36 @@
 <input type="hidden" name="member_department">
 <input type="hidden" name="attendence_regdate">
 
-<div class="col-md-12" style="margin-top:10px; margin-right:10px; display:flex; ">
-<div class="col-md-8" style="margin-right:20px;  ">
-
-
-
+<div class="w-auto flex">
+<div class="col-md-8" >
 <div class="col-md-4">
-<div class="card card-primary" style="width:800px; ">
-<div class="card-header" style=" background-color:#333c9e;">
-<h5 class="card-title">
-<div style="color:white; margin-left:10px; margin-top:10px;">
-<span >
+<div class="card card-primary " style="width:800px; ">
+<div class="card-header rounded-2xl" style=" background-color:#808080;">
+<h2 class="card-title">
+<div>
+
+</div>
+<table class="table table-fixed w-auto ">
+	<tr class="text-white ">
+	<td class=" flex">
+	<div>
+	<span class="flex text-center">
 <c:set var="Team" value="${Teams[0]}"/>
 ${Team.name}
 부서 부장 :<c:set var="member" value="${memberdepartmentname[0]}"/>
-  ${member.member_name}
+  ${member.member_name}&nbsp;&nbsp;
 </span>
-
-<c:forEach var="Team" items="${Teams }"><span style="margin-left:10px;">${Team.name}${Team.team }팀 팀장:<c:forEach var="member" items="${memberdepartmentname}" varStatus="status">
+</div>
+<c:forEach var="Team" items="${Teams }"><span class="flex text-center">${Team.name}${Team.team }팀 팀장:<c:forEach var="member" items="${memberdepartmentname}" varStatus="status">
       <c:if test="${status.index != 0 and member.member_team == Team.team}">
-        ${member.member_name} 
+        ${member.member_name}&nbsp;&nbsp; 
       </c:if>
     </c:forEach></span></c:forEach>
-</div>
-<table class="table table-fixed w-full" style="margin-top:15px; ">
-  <tr>
+	</td>
+	</tr>
+  <tr class="flex justify-items-center">
     <th id="TOTALWORK" style="" >이달 총 근태/이달 총 근무일</th>
-  
- 
- <td style="font-weight: bold;">
+ <td>
   <c:forEach var="Team" items="${Teams}" varStatus="teamIndex">
 <c:set var="teamNum" value="${Team.team}" />
 <c:choose>
@@ -65,7 +66,7 @@ ${Team.name}
 </td>
   </tr>
 		<tr>
-</table></h5>
+</table></h2>
 <div class="card-tools">
 
 </div>
@@ -135,14 +136,14 @@ ${Team.name}
 
 
 
-   <div class="row">
+   <div class="flex justify-center">
   <div class="col">
     <nav aria-label="Contacts Page Navigation" >
       <c:set var="pageMenuArmLen" value="4" />
       <c:set var="startPage" value="${page - pageMenuArmLen < 1 ? 1 : page - pageMenuArmLen}" />
       <c:set var="endPage" value="${page + pageMenuArmLen > pagesCount ? pagesCount : page + pageMenuArmLen}" />
       <c:set var="pageBaseUri" value="member_department=${empty param.member_department ? '' : param.member_department}&searchKeyword=${param.searchKeyword}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
-      <ul class="pagination justify-content-center m-0"  >
+      <ul class="pagination justify-content-center m-0 flex"  >
         <c:if test="${startPage > 1}">
           <li class="page-item">
             <a class="page-link btn btn-sm" href="?${pageBaseUri}&page=1">1</a>
@@ -180,20 +181,23 @@ ${Team.name}
 
 </div>
 
-
-<div class="card card-danger">
-<div class="card-header">
-<h3 class="card-title">출근률</h3>
+<div class="card ">
+<div class="card-header bg-red-400 rounded-xl">
+<h3 class="card-title my-3 ml-3 text-white ">출근률</h3>
 <div class="card-tools">
 </div>
 </div>
 <div class="card-body">
-	<div class="col-lg-12" >
+	<div class="w-auto" >
 <div style="margin-left:10px;">
 			<canvas id="donutChart"
 							style="min-height: 200px; height: 200px; max-height: 250px; max-width: 100%; display: block; width: 521px;"
 							width="703" height="337" class="chartjs-render-monitor"></canvas>
+							
+
 </div>
+</div>
+
 <table class="table table-fixed w-full">
 <thead>
 		<tr>
@@ -250,50 +254,6 @@ ${Team.name}
 </div>
 </div>
 
-
-
-
-<!-- <script>
-  var today = new Date();
-
-  var startDate = new Date(today.getFullYear(), today.getMonth(), 1);
-  var endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-
-  var totalDays = endDate.getDate();
-
-  var weekdaysCount = 0;
-
-  for (var date = startDate; date <= today; date.setDate(date.getDate() + 1)) {
-    var dayOfWeek = date.getDay();
-    if (dayOfWeek !== 6 && dayOfWeek !== 0) {
-      weekdaysCount++;
-    }
-  }
-
-  var todayTeams = ${todayTeams};
-
-  var totalWarkEl = document.getElementById("TO");
-
-  for (var i = 0; i < todayTeams.length; i++) {
-    var department = todayTeams[i];
-    var calculatedValue = department.team_count !== 0 ? (department.team_count / weekdaysCount * 100) : 0;
-    var listItem = document.createElement("li");
-    listItem.innerHTML = `<div>나와라</div>` 
-    	
-   //`${department.attendence_regdate.toLocalDate().toString().substring(0, 10)}: ${calculatedValue.toFixed(2)}%`;
-    document.getElementById('test').textContent= "123132";
-  }
-</script> -->
-
-
-
-
-<!-- <script>
-function openwindow(url) {
-  window.open(url, 'departmentdetail', 'width=1000,height=800');
-}
-</script>
- -->
 <script>
 	var today = new Date();
 
@@ -364,7 +324,7 @@ totalWarkEl.innerHTML = attendanceRate.toFixed(2) + "%";
 
 
 <!--JS  -->
-<script>
+<!-- <script>
 	window.onload = function() {
 		
 			var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
@@ -415,7 +375,34 @@ totalWarkEl.innerHTML = attendanceRate.toFixed(2) + "%";
 </script>
 
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+   -->
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+  <script>
+    var ctx = document.getElementById('donutChart').getContext('2d');
+    var donutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+    	  labels : [ '출근', '결근', '지각', '조퇴' ],
+        datasets: [{
+        	data : [ ${totayStatusTotalCount}, ${totalTeamCount-(totayStatusTotalCount+todaystatus5TotalCount+todaystatus7TotalCount) }, ${todaystatus7TotalCount }, ${todaystatus5TotalCount } ],
+			backgroundColor : [ '#007BFF', '#DC3545', '#FFC107',
+					'#6C757D' ],
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          position: 'bottom',
+        }
+      }
+    });
+  </script>
+<!-- <script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> -->
+	
+	
 
 <%@include file="/WEB-INF/jsp/include/foot.jspf" %>

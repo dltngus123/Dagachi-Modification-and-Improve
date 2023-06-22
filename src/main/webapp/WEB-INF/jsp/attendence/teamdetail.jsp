@@ -2,15 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <%@include file="/WEB-INF/jsp/include/openhead.jspf" %>
 <input type="hidden" name="member_department" value="${department.name }">
 <input type="hidden" name="member_team" value="${department.team}">
-<div class="col-md-12" style="margin-top:10px; margin-right:10px; display:flex; ">
+<div class="col-md-12" style=" margin-right:10px; display:flex; ">
 <div class="col-md-7" style="margin-right:20px; ">
 
-	<div class="card card-success" style="margin-top:15px; width:580px; height:600px;">
-<div class="card-header" style="background-color:#333c9e;">
+	<div class="card card-success" style=" width:580px; height:600px;">
+<div class="card-header bg-gray-400 rounded-xl my-2 text-white" >
  
 
   <div style="text-align: left;">
@@ -66,7 +67,7 @@
 			<th>직급</th>
 			<th>이름</th>
 			<th>출근여부</th>
-			<th>출근 시간</th>
+			<th>출근일</th>
 			<th>연/월차 사유</th>
 		</tr>
 	</thead>
@@ -79,6 +80,7 @@
 				<input type="hidden" name="member_name" value="${teamdetail.member_name}"/>
 				<input type="hidden" name="member_team" value="${department.team}"/>
 				</form>
+				
 			</td>
 			 <td>
 				<c:choose>
@@ -105,7 +107,7 @@
 				  </c:otherwise>
 				</c:choose>
 			</td>
-			<td>${teamdetail.attendence_regdate.toLocalDate().toString().substring(0, 10)}</td>
+			<td class="text-xs">${teamdetail.attendence_regdate.toLocalDate().toString().substring(0, 10)}</td>
 			<td>${teamdetail.attendence_reason}</td>
 		</tr>
 		</c:forEach>
