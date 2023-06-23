@@ -8,12 +8,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <style>
 .card {
-	width: 800px;
+	width: auto;
 	margin: auto;
 }
 
 .infobox {
-	width: 800px;
+	width: auto;
 	height: 100px;
 	display: flex;
 }
@@ -48,11 +48,11 @@
 	margin: 0 auto;
 }
 </style>
-<div class="p-4 sm:ml-64">
+<div class="">
 
 	<div class="card">
 		<span style="font-weight: bold; font-size: 20px; padding: 10px;">
-			${ap.approval_title }</span>
+			제목: ${ap.approval_title }</span>
 
 		<div class="infobox">
 			<div class="1">
@@ -74,10 +74,10 @@
 				</div>
 				<div class="info">
 					<c:if test="${ap.approval_level eq '0' }">
-						<span class="badge bg-warning">보통</span>
+						<span class="badge bg-yellow-400">보통</span>
 					</c:if>
 					<c:if test="${ap.approval_level eq '1' }">
-						<span class="badge bg-danger">긴급</span>
+						<span class="badge bg-blue-400">긴급</span>
 					</c:if>
 				</div>
 			</div>
@@ -95,16 +95,16 @@
 					<c:if test="${approver.a_approver eq member1.member_id}">
 						<c:set var="memberFound" value="true" />
 						<c:if test="${approver.a_status eq '0'}">
-							<span id="status1" class="badge bg-primary">승인</span>
+							<span id="status1" class="badge bg-green-400">승인</span>
 						</c:if>
 						<c:if test="${approver.a_status eq '1'}">
-							<span  id="status1"class="badge bg-danger">반려</span>
+							<span  id="status1"class="badge bg-red-400">반려</span>
 						</c:if>
 					</c:if>
 				</c:forEach>
 
 				<c:if test="${not memberFound}">
-					 <span id="status1" class="badge bg-warning">대기</span>
+					 <span id="status1" class="badge bg-yellow-400">대기</span>
 				</c:if>
 			</div>
 			<div id="approver2"
@@ -117,16 +117,16 @@
 					<c:if test="${approver.a_approver eq member2.member_id}">
 						<c:set var="memberFound" value="true" />
 						<c:if test="${approver.a_status eq '0'}">
-							<span id="status2"  class="badge bg-primary">승인</span>
+							<span id="status2"  class="badge bg-green-400">승인</span>
 						</c:if>
 						<c:if test="${approver.a_status eq '1'}">
-							<span id="status2" class="badge bg-danger">반려</span>
+							<span id="status2" class="badge bg-red-400">반려</span>
 						</c:if>
 					</c:if>
 				</c:forEach>
 
 				<c:if test="${not memberFound}">
-					 <span id="status2" class="badge bg-warning">대기</span>
+					 <span id="status2" class="badge bg-yellow-400">대기</span>
 				</c:if>
 			</div>
 			<div id="approver3"
@@ -139,16 +139,16 @@
 					<c:if test="${approver.a_approver eq member3.member_id}">
 						<c:set var="memberFound" value="true" />
 						<c:if test="${approver.a_status eq '0'}">
-							<span id="status3"class="badge bg-primary">승인</span>
+							<span id="status3"class="badge bg-green-400">승인</span>
 						</c:if>
 						<c:if test="${approver.a_status eq '1'}">
-							<span id="status3" class="badge bg-danger">반려</span>
+							<span id="status3" class="badge bg-red-400">반려</span>
 						</c:if>
 					</c:if>
 				</c:forEach>
 
 				<c:if test="${not memberFound}">
-					 <span id="status3" class="badge bg-warning">대기</span>
+					 <span id="status3" class="badge bg-yellow-400">대기</span>
 				</c:if>
 			</div>
 
@@ -170,7 +170,7 @@
 		  		<td> <span id="status3" class="badge bg-warning">대기</span></td>
 		  		</c:if>
 		  		<c:if test="${approvers[0].a_status eq '0' }">
-		  		<td style="width:100px;"> <span id="status3" class="badge bg-primary">승인</span></td>
+		  		<td style="width:100px;"> <span id="status3" class="badge bg-green-400">승인</span></td>
 		  		</c:if>
 		  		<c:if test="${approvers[0].a_status eq '1' }">
 		  		<td> <span id="status3" class="badge bg-danger">반려</span></td>
@@ -181,13 +181,13 @@
 		  		<tr>
 		  		<td>${member2.member_name } ${member2.member_rank }</td>
 		  		<c:if test="${approvers[1].a_status eq null }">
-		  		<td> <span id="status3" class="badge bg-warning">대기</span></td>
+		  		<td> <span id="status3" class="badge bg-yellow-400">대기</span></td>
 		  		</c:if>
 		  		<c:if test="${approvers[1].a_status eq '0' }">
-		  		<td> <span id="status3" class="badge bg-primary">승인</span></td>
+		  		<td> <span id="status3" class="badge bg-green-400">승인</span></td>
 		  		</c:if>
 		  		<c:if test="${approvers[1].a_status eq '1' }">
-		  		<td> <span id="status3" class="badge bg-danger">반려</span></td>
+		  		<td> <span id="status3" class="badge bg-red-400">반려</span></td>
 		  		</c:if>
 		  		<td>${approvers[1].a_comment}</td>
 		  		<td><fmt:formatDate value="${approvers[1].a_approvaldate }" pattern="yyyy.MM.dd HH.mm" /></td>
@@ -195,13 +195,13 @@
 		  		<tr>
 		  		<td>${member3.member_name } ${member3.member_rank }</td>
 		  		<c:if test="${approvers[2].a_status eq null }">
-		  		<td> <span id="status3" class="badge bg-warning">대기</span></td>
+		  		<td> <span id="status3" class="badge bg-yellow-400">대기</span></td>
 		  		</c:if>
 		  		<c:if test="${approvers[2].a_status eq '0' }">
-		  		<td> <span id="status3" class="badge bg-primary">승인</span></td>
+		  		<td> <span id="status3" class="badge bg-green-400">승인</span></td>
 		  		</c:if>
 		  		<c:if test="${approvers[2].a_status eq '1' }">
-		  		<td> <span id="status3" class="badge bg-danger">반려</span></td>
+		  		<td> <span id="status3" class="badge bg-red-400">반려</span></td>
 		  		</c:if>
 		  		<td>${approvers[2].a_comment}</td>
 		  		<td><fmt:formatDate value="${approvers[2].a_approvaldate }" pattern="yyyy.MM.dd HH.mm" /></td>
@@ -213,20 +213,20 @@
 		</div>
 	
 		
-		<div class="comment-box" style="margin-top: 20px; margin-left: 75px;">
+		<div class="comment-box" style="margin-top: 20px;  border:1px solid black;">
 		<textarea name="commentdata" placeholder="의견을 작성해주세요. (50글자 이하)" style="width: 650px; height: 100px;" oninput="checkInputLength()"></textarea>
 
 		</div>
 		<div class="btns"
-			style="display: flex; justify-content: flex-end; padding-right: 30px;">
+			style="display: flex; justify-content: flex-end; padding-right: 30px; margin-top:20px;">
 			<div
 				style="width: 250px; display: flex; justify-content:flex-end">
 
 				<div id="btns2" style="display:flex;">
-					<button onclick="approval_go(0)" style="background-color: #28a745; width: 80px; height: 50px; border: none; margin-right:10px; border-radius: 10%;">승인</button>
-					<button onclick="approval_go(1)" style="background-color: #dc3545; width: 80px; height: 50px; border: none;margin-right:10px; border-radius: 10%;">반려</button>
+					<button onclick="approval_go(0)" class="btn bg-blue-400"style="width: 80px; height: 50px; border: none; margin-right:10px; border-radius: 10%;">승인</button>
+					<button onclick="approval_go(1)" class="btn bg-red-400"style=" width: 80px; height: 50px; border: none;margin-right:10px; border-radius: 10%;">반려</button>
 				</div>
-				<button onclick="window.close()"style="background-color: gray; width: 80px; height: 50px; border: none; border-radius: 10%;">취소</button>
+				<button onclick="window.close()"class="btn bg-gray-400"style=" width: 80px; height: 50px; border: none; border-radius: 10%;">취소</button>
 			</div>
 
 

@@ -28,10 +28,16 @@
 </style>
 
 <div class="p-4 sm:ml-64">
-	
+	    		<h1 class="text-3xl my-2">
+	    		
+ 
+      <span style="color: black;">
+       ${title}
+      </span>
+   </h1>
     <div class="card">
     	<div class="card-header">
-    		<h5 style="padding:10px;">${title}</h5>
+
     		</div>
           <div class="card-body" >
          
@@ -55,7 +61,9 @@
 							<%-- <option value="date" ${st eq 'date' ? 'selected':'' }>날짜</option>	 --%>					
 						</select>	              		
               		<input  class="form-control" type="text" name="sk" placeholder="검색어를 입력하세요." value="${sk }"/>
-              		<button type="submit" style="width:90px; border:none; background-color:#5865F2; border-radius:3px 3px 3px 3px;">검색</button>
+              		 <button type="submit" class="w-1/8 bg-blue-300 btn-sm btn">
+            	<i class="fas fa-search text-lg"></i>
+            </button>
 						</form>
               	</div>
               	<c:if test="${approvalList.size() ne 0 }">
@@ -87,7 +95,7 @@
                           </c:if>
                          </c:forEach>
                         </td>
-                        <td>${approval.approval_title } <c:if test="${approval.approval_level eq 1 }"><span class="badge bg-danger">긴급</span></c:if></td>
+                        <td>${approval.approval_title } <c:if test="${approval.approval_level eq 1 }"><span class="badge bg-blue-400">긴급</span></c:if></td>
                         <td>
                       <c:forEach items="${memberList }" var="member">
                           <c:if test="${member.member_id eq approval.approval_register }">
@@ -96,9 +104,9 @@
                           </c:forEach>
                         </td>
                         <td>
-                          <c:if test="${approval.approval_status eq 0}"><span class="badge bg-warning">대기</span></c:if>
-                          <c:if test="${approval.approval_status eq 1}"><span class="badge bg-success">완료</span></c:if>
-                          <c:if test="${approval.approval_status eq 2}"><span class="badge bg-danger">반려</span></c:if>
+                          <c:if test="${approval.approval_status eq 0}"><span class="badge bg-yellow-400">대기</span></c:if>
+                          <c:if test="${approval.approval_status eq 1}"><span class="badge bg-green-400">완료</span></c:if>
+                          <c:if test="${approval.approval_status eq 2}"><span class="badge bg-red-400">반려</span></c:if>
                         </td>
                       </tr>
                     </c:forEach>
@@ -112,7 +120,7 @@
 				</div>
 				</c:if>
 				  <div class="row">
-  <div class="col">
+  <div class="col text-center">
     <nav aria-label="Contacts Page Navigation" >
       <c:set var="pageMenuArmLen" value="4" />
       <c:set var="startPage" value="${param.page - pageMenuArmLen < 1 ? 1 : param.page - pageMenuArmLen}" />

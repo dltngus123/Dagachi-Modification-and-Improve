@@ -5,7 +5,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/head.jspf"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<script>
+   
+   window.addEventListener('load', function(){
+        checkedBookMark("/approval/registForm");
+         
+      })
+   
+</script>
 
 <style>
 #approver {
@@ -49,9 +56,17 @@
 </style>
 
 <div class="p-4 sm:ml-64">
+	<h1 class="text-3xl my-2">
+   <a href='javascript:registBookMark("/approval/registForm", "새 결재 작성")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
+       새 결재 작성
+      </span>
+   </h1>
 	<div class="card" style="width: 90%; margin: auto;">
 		<div class="card-header">
-			<h5 style="padding: none;">새 결재 작성</h5>
+		
 		</div>
 		<form class="form"method="post" action="regist">
 			<div class="card-body">
@@ -62,7 +77,7 @@
 					<div>
 						<span>양식: </span><select name="form" onchange="formChange(this)"
 							style="width: 130px; height: 30px; font-size: 13px; margin-left: 10px;">
-							<option value="">양식을 선택하세요.</option>
+							<option value="" class="bordered">양식을 선택하세요.</option>
 							<c:forEach var="form" items="${form}">
 								<option value="${form.form_id}">${form.form_name}</option>
 							</c:forEach>
@@ -93,8 +108,8 @@
 					</div>
 					<div>
 						<span>작성자: </span><input name="member_id"
-							style="margin-left: 10px; width: 130px; height: 30px; border: none; background: #D7D7D7;"
-							type="text" value="${loginUser.member_name }" readonly> <input type="hidden"
+							style="margin-left: 10px; width: 130px; height: 30px;  background: #D7D7D7;"
+							type="text" value="${loginUser.member_name }" readonly> <input type="hidden" class="input input-bordered"
 							id="member_id" value="${loginUser.member_id}">
 					</div>
 				</div>
@@ -102,25 +117,25 @@
 				<span style="margin-left: 10px;">결재선<span style="color: red;">*</span></span>
 
 				<hr>
-				<div class="step2" style="display: flex; justify-content: center;">
+				<div class="step2 text-center" style="display: flex; justify-content: center;">
 					<div id="infobox" name="1" class="1" style="width: 175px;">
 
 
-						<div class="card" style="margin-right: 10px;">
-							<div class="card-header" style="background-color: #D7D7D7;">
-								<h3 class="card-title" style="margin-top: 2px;">결재선 1</h3>
-								<div class="card-tools">
+						<div class="card text-center" style="margin-right: 10px;">
+							<div class="card-header " style="background-color: #D7D7D7;">
+								<h3 class="card-title ml-10" style="margin-top: 2px;">결재선 1</h3>
+								<div class="card-tools text-center" >
 									<button id="open-modal" type="button"
 										style="background: none; border: none;">
-										<span>➕</span>
+										<span >➕</span>
 									</button>
 
 								</div>
 
 							</div>
 
-							<div class="card-body" style="height: 70px;">
-								<span style="font-size: 14px;" id="info1"></span>
+							<div class="card-body " style="height: 70px; width:180px; ">
+								<span style="font-size: 12px; id="info1"></span>
 							</div>
 
 						</div>
@@ -129,7 +144,7 @@
 					<div id="infobox2" name="2"  class="2" style="width: 175px;">
 						<div class="card" style="margin-right: 10px;">
 							<div class="card-header" style="background-color: #D7D7D7;">
-								<h3 class="card-title" style="margin-top: 2px;">결재선 2</h3>
+								<h3 class="card-title ml-10" style="margin-top: 2px;">결재선 2</h3>
 								<div class="card-tools">
 									<button id="open-modal2" type="button"
 										style="background: none; border: none;">
@@ -139,8 +154,8 @@
 
 							</div>
 
-							<div class="card-body" style="height: 70px;">
-								<span style="font-size: 14px;" id="info2"></span>
+							<div class="card-body" style="height: 70px;width:180px;">
+								<span style="font-size: 12px;" id="info2"></span>
 							</div>
 
 						</div>
@@ -149,7 +164,7 @@
 					<div id="infobox3" name="3"  class="3" style="width: 175px;">
 						<div class="card">
 							<div class="card-header" style="background-color: #D7D7D7;">
-								<h3 class="card-title" style="margin-top: 2px;">결재선 3</h3>
+								<h3 class="card-title ml-10" style="margin-top: 2px;">결재선 3</h3>
 								<div class="card-tools">
 									<button id="open-modal3" type="button"
 										style="background: none; border: none;">
@@ -159,8 +174,8 @@
 
 							</div>
 
-							<div class="card-body" style="height: 70px;">
-								<span style="font-size: 14px;" id="info3"></span>
+							<div class="card-body" style="height: 70px;width:180px;">
+								<span style="font-size: 12px;" id="info3"></span>
 							</div>
 
 						</div>
@@ -171,19 +186,19 @@
 				<hr>
 				<div class="title">
 					<span style="margin-left: 10px;">제목 :</span><input type="text"
-						name="title" style="width: 80%; margin-left: 10px;">
+						name="title" placeholder="제목을 입력해 주세요"style="width: 80%; margin-left: 10px;">
 				</div>
 				<hr>
 				<div class="contentbox">
-					<textarea class="content" name="content" id="content">
+					<textarea class="content" name="content" id="content" >
 			
 			</textarea>
 
 					<span style="float: right;">
 					<input type="hidden" name="save" value="1"/>
 						<button onclick="submit_go(1)"type="button" name="save" value="1"
-							class="btn btn-sidebar"
-							style="background-color: #5865F2; width: 100px;">제출</button>
+							class="btn btn-sidebar bg-blue-300 mt-2"
+							style=" width: 100px;">제출</button>
 
 						<button onclick="submit_go(2)" type="button" name="save" value="2"
 							class="btn btn-sidebar"
@@ -197,7 +212,7 @@
 
 		<div id="approver">
 			<div class="modal-content">
-				<h4 style="display: block; border-bottom: 2px solid black;">결재선
+				<h4 class="text-lg font-bold" style="display: block; border-bottom: 2px solid black;">결재선
 					설정</h4>
 				<div>
 					<div
