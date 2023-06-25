@@ -65,9 +65,9 @@
       <div class="p-2">
          <input type="checkbox">아이디 기억하기</input>
       </div>
-      <button type="submit" class="btn btn-block btn-primary button">LOGIN</button>
+      <button type="submit" class="btn btn-block bg-blue-400 button">LOGIN</button>
       </form> 
-      <a href="javascript:window.open('../common/forget', 'dd', 'width=800,height=800');">아이디/비밀번호 찾기</a>
+      <a class="" href="javascript:window.open('../common/forget', 'dd', 'width=800,height=800');">아이디/비밀번호 찾기</a>
   </div>
 </div>
    

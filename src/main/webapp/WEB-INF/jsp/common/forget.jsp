@@ -157,19 +157,28 @@ margin-left:20px;
 
    
       <div class="card md:card-side bg-base-100 shadow-xl h-1/2">
-  <div class="flex justify-center items-center border-r border-gray-700 bg-blue-100 rounded-l-2xl">
+  <div class="flex justify-center w-1/3 items-center border-r border-gray-700 bg-blue-100 rounded-l-2xl">
      <h1 class="font-bold text-2xl p-8 cl-signature text-gray-500">&nbsp;&nbsp;아이디 찾기&nbsp;&nbsp;&nbsp;</h1>
   </div>
   <div class="card-body">
     <form id="id"action="findId" method="post">
-      <div class="font-bold">이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="이름을 입력해 주세요" name="name" class="input input-bordered w-60 w-full max-w-xs" /></div>
+       <div class="font-bold flex flex-nowrap w-full">
+      <div class="w-1/5">이름</div>
+      <input type="text" placeholder="이름을 입력해 주세요" name="name" class="input input-bordered w-4/5 max-w-xs" />
+      </div>
          </br>
-      <div class="font-bold">전화번호<input type="text" placeholder="ex)010-0000-0000" name="phone" class="input input-bordered w-60 w-full max-w-xs" /></div>
+      <div class="font-bold flex flex-nowrap w-full items-center">
+      <div class="w-1/5">전화번호</div>
+      <input type="text" placeholder="ex)010-0000-0000" name="phone" class="input input-bordered w-4/5 w-full max-w-xs" />
+      </div>
       </br>
-      <div class="font-bold">이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"  name="email"placeholder="example@xxxx.com" class="input input-bordered w-full max-w-xs" /></div>
+      <div class="font-bold flex flex-nowrap w-full items-center">
+      <div class="w-1/5">이메일</div>
+      <input type="text"  name="email"placeholder="example@xxxx.com" class="input input-bordered w-4/5 max-w-xs" />
+      </div>
        </br>
        <div style="margin-right:50px;display:flex; justify-content:flex-end;">
-       <button type="button"onclick="idfind_go();"class="btn btn-block btn-primary col-sm-3" id="btn-modal-id">ID찾기</button>
+       <button type="button"onclick="idfind_go();"class="btn w-full bg-blue-300" id="btn-modal-id">ID찾기</button>
        </div>
       </form> 
     
@@ -180,21 +189,33 @@ margin-left:20px;
 
    
       <div class="card md:card-side bg-base-100 shadow-xl h-1/2">
-  <div class="flex justify-center items-center border-r border-gray-700 bg-blue-100 rounded-l-2xl">
+  <div class="flex justify-center items-center w-1/3 border-r border-gray-700 bg-blue-100 rounded-l-2xl">
      <h1 class="font-bold text-2xl p-8 cl-signature text-gray-500">비밀번호 찾기</h1>
   </div>
-  <div class="card-body">
+  <div class="card-body w-2/3">
       <form id="pwd" method="post" action="findPwd">
-      <div class="font-bold">아이디&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="id" placeholder="아이디를 입력해 주세요" class="input input-bordered w-60 w-full max-w-xs" /></div>
+      <div class="font-bold flex flex-nowrap w-full items-center">
+      <div class="w-1/5">아이디</div>
+      <input type="text" name="id" placeholder="아이디를 입력해 주세요" class="input input-bordered w-4/5 max-w-xs" />
+      </div>
          </br>
-      <div class="font-bold">이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"  name="nameForPwd" placeholder="이름을 입력해 주세요" class="input input-bordered w-60 w-full max-w-xs" /></div>
+      <div class="font-bold flex flex-nowrap w-full items-center">
+      <div class="w-1/5">이름</div>
+      <input type="text"  name="nameForPwd" placeholder="이름을 입력해 주세요" class="input input-bordered w-4/5 max-w-xs" />
+      </div>
       </br>
-      <div class="font-bold">전화번호<input type="text" placeholder="ex)010-0000-0000" name="phoneForPwd" class="input input-bordered w-full max-w-xs" /></div>
+      <div class="font-bold flex flex-nowrap w-full items-center">
+      <div class="w-1/5">전화번호</div>
+      <input type="text" placeholder="ex)010-0000-0000" name="phoneForPwd" class="input input-bordered w-4/5 max-w-xs" />
+      </div>
        </br>
-       <div class="font-bold">이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="example@xxxx.com" name="emailForPwd" class="input input-bordered w-full max-w-xs" /></div>
+       <div class="font-bold flex flex-nowrap w-full items-center">
+       <div class="w-1/5">이메일</div>
+      <input type="text" placeholder="example@xxxx.com" name="emailForPwd" class="input input-bordered w-4/5 max-w-xs" />
+      </div>
        </br>
        <div style="margin-right: 50px; display: flex; justify-content: flex-end;">
-        <button id="btn-modal-pwd"  onclick="pwdfind_go();"type="button" class="btn btn-block btn-primary col-sm-3" style="height: 40px;">PWD 찾기</button>
+        <button id="btn-modal-pwd"  onclick="pwdfind_go();"type="button" class="btn btn-block col-sm-3" style="height: 40px;">PWD 찾기</button>
        </div>
       </form> 
     
@@ -202,7 +223,7 @@ margin-left:20px;
 </div>
    
      <div style="margin-right:50px;display:flex; justify-content:flex-end;">
-       <button onclick="window.close()"class="btn btn-active btn-ghost col-sm-2" style="width:60px; height:40px;">닫기</button>
+       <button onclick="window.close()"class="btn btn-active btn-ghost col-sm-2" style=" height:40px;">닫기</button>
       </div>
       
          </div>
