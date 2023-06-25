@@ -32,61 +32,59 @@
 %>
 
 <c:set var="percent" value="${pageScope.percent }"></c:set>
-<div class="card-body pmCard${pl.pl_Id }">
-	<div class="col-12">
-			<div class="info-box bg-success">
+<div class="pmCard${pl.pl_Id } mb-1">
+	<div class="w-full">
+			<div class="rounded-3xl mb-1 bg-gray-300 p-2">
 			<input type="hidden" name="pl_id_value" value="" />
 				<div class="info-box-content">
-					<h3>${pl.pl_Name }</h3>
+					<h3 class="text-lg font-bold">${pl.pl_Name }</h3>
 					<span>현재 진행율 ${percent} %</span>
-					<div class="progress">
-						<div class="progress-bar bg-warning" style="width: ${percent }%"></div>
-					</div>
-					<div class="row">
+						<progress class="progress progress-info w-full" value="${percent }" max="100"></progress>
+					<div class="flex">
 						<fmt:formatDate var="endDate" value="${pl.pl_EndDate }" pattern="yyyy년 MM월 dd일"/>
 						<div class="col-sm-6" style="font-size:12px;">마감기한: ${endDate }</div>
 						<!-- 여기다가 클릭시 다른 업무로 업무 파싱하기 -->
 					</div>
-					<div class="row">
+					<div class="flex">
 					
-					<div class="col-12">
+					<div class="w-full">
 						<div class="card card-warning collapsed-card">
-						<div class="card-header">
+						<div class="card-header flex justify-between">
 						<h3 class="card-title">업무 상세보기</h3>
 						<div class="card-tools">
-						<button type="button" class="btn btn-tool" data-card-widget="collapse">
+						<button type="button" class="btn btn-tool" data-card-widget="collapse" onclick="bbb('s${pl.pl_Id}')">
 						<i class="fas fa-plus"></i>
 						</button>
 						</div>
 						
 						</div>
 						
-						<div class="card-body divpm${pl.pl_Id }" style="display:none; color:black;">
-							<ul class="pmli${pl.pl_Id }">
+						<div class="card-body p-2 divpm${pl.pl_Id } s${pl.pl_Id }" style="display:none; color:black;">
+							<ul class="pmli${pl.pl_Id } bg-white p-2 rounded-3xl">
 								<c:forEach var="pm" items="${pl.extra_pmList}">
 								<c:if test="${pm.pl_Id eq pl.pl_Id }">
 								
 									<li id="pl${pl.pl_Id}pm${pm.pm_Id}"style="list-style: none;">
-											<div class="row">
-												<div class="col-sm-7 pl${pl.pl_Id}pm${pm.pm_Id}name">
+											<div class="flex flex-nowrap">
+												<div class="w-2/3 pl${pl.pl_Id}pm${pm.pm_Id}name">
 													${pm.pm_name }
 												</div>
-												<div class="col-sm-3 ">
+												<div class="w-1/4 ">
 													${pm.extra_pm_manager_name }
 												</div>
-												<div class="col-sm-2 text-cneter">
+												<div class="w-1/6 text-cneter">
 													<c:if test="${pm.pm_status eq '0'}">
-														<span class="badge bg-primary">
+														<span class="badge bg-blue-300">
 														대기
 														</span>
 													</c:if>
 													<c:if test="${pm.pm_status eq '1'}">
-														<span class="badge bg-warning">
+														<span class="badge bg-yellow-300">
 														진행
 														</span>
 													</c:if>
 													<c:if test="${pm.pm_status eq '2'}">
-														<span class="badge bg-success">
+														<span class="badge bg-green-300">
 														완료
 														</span>
 													</c:if>

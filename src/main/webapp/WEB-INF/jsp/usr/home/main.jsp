@@ -362,11 +362,10 @@
             </h3>
           </div>
 <div class="card-body">
-    <div class="card card-info card-outline">
+   
         <div class="card-body" style="text-align:left; font-weight: bold;">
-            <div id="todayCheckbox"></div>
-            <div id="message"></div>
-        </div>
+            <div id="todayCheckbox">
+          </div>
     </div>
 </div>
         </div>

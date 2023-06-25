@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
               var memberAuth = ${loginUser.member_auth};
               if (memberAuth !== 1) {
-                $("#calendarModal").ShowModal("show");
+                $("#calendarModal").modal("show");
               } else {
                 $("#calendarModal").modal("hide");
                 alert("공용 일정 등록 권한이 없습니다.");
@@ -191,6 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     data: JSON.stringify(updatedData),
                     contentType: "application/json",
                     success: function(response) {
+                    	console.log('aaa');
                         alert("정상적으로 수정 되었습니다.");
                         location.reload();
                     },
@@ -310,109 +311,131 @@ document.addEventListener('DOMContentLoaded', function() {
   
 
    
-<div class="modal fade" id="calendarModal" data-modal-show="true" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<dialog class="modal fade" id="calendarModal" data-modal-show="true" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
+  <div class="modal-box">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">일정을 입력하세요.</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <div class="flex justify-between">
+        <h5 class="modal-title font-bold text-xl" id="exampleModalLabel">일정 추가</h5>
+        <button type="button" class="close  p-1 text-red-600 rounded-xl justify-self-end mb-2" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">X</span>
         </button>
+        </div>
+        <hr/>
+        <br/>
       </div>
-      <div class="modal-body">
-       <div class="form-group">
-          <label for="schedule_title" class="col-form-label">일정 제목</label>
-          <input type="text" class="form-control" id="schedule_title" name="schedule_title" >
-          <label for="schedule_content" class="col-form-label float-left">일정 내용</label>
-          <input type="text" class="form-control" id="schedule_content" name="schedule_content" >
-          <label for="schedule_start" class="col-form-label">시작 시간 설정</label>
-          <input type="datetime-local" class="form-control" id="schedule_start" name="schedule_start">
-          <label for="schedule_end" class="col-form-label">종료 시간 설정</label>
-          <input type="datetime-local" class="form-control" id="schedule_end" name="schedule_end">
+      <div class="modal-body ">
+       <div class="form-group text-center mb-2">
+          <label for="schedule_title" class="col-form-label font-bold float-left mr-2 mb-2">일정 제목</label>
+          <input type="text" class="form-control input input-bordered mb-2 w-full" id="schedule_title" name="schedule_title" >
+          <label for="schedule_content" class="col-form-label font-bold float-left mr-2 mb-2">일정 내용</label>
+          <input type="text" class="form-control input input-bordered mb-2 w-full" id="schedule_content" name="schedule_content" >
+          <label for="schedule_start" class="col-form-label font-bold float-left mb-2">시작 시간 설정</label>
+          <input type="datetime-local" class="form-control input input-bordered mr-2 mb-2 w-full" id="schedule_start" name="schedule_start">
+          <label for="schedule_end" class="col-form-label font-bold float-left mb-2">종료 시간 설정</label>
+          <input type="datetime-local" class="form-control input input-bordered mr-5 mb-2 w-full" id="schedule_end" name="schedule_end">
           <input type="hidden" id="schedule_start" name="schedule_start">
           <input type="hidden" id="reservation_end" name="reservation_end">
           
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-warning" id="addCalendar">추가</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="sprintSettingModalClose">취소</button>
+        <br/>
+      <hr/>
+      <div class="modal-footer mt-2 flex justify-center">
+        <button type="submit" class="btn bg-blue-400 ml-2" id="addCalendar">추가</button>
+        <button type="button" class="btn bg-red-400" data-dismiss="modal" id="sprintSettingModalClose">취소</button>
       </div>
     </div>
   </div>
-</div>
+  </div>
+</dialog>
 
 <!-- 상세  -->
-<div class="modal fade" id="calendarDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<dialog class="modal fade" id="calendarDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
+  <div class="modal-box">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">일정 상세 정보</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+      <div class="flex justify-between">
+        <h5 class="modal-title font-bold text-xl" id="exampleModalLabel">일정 상세 정보</h5>
+        <button type="button" class="close  p-1 text-red-600 rounded-xl justify-self-end mb-2" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">X</span>
         </button>
+        </div>
       </div>
+      <hr/>
+      <br/>
       <div class="modal-body">
-        <div class="form-group">
-          <label for="schedule_title_detail" class="col-form-label">일정 제목</label>
-          <input type="text" class="form-control" id="schedule_title_detail" name="schedule_title" readonly>
-          <label for="schedule_content_detail" class="col-form-label float-left">일정 내용</label>
-          <input type="text" class="form-control" id="schedule_content_detail" name="schedule_content" readonly>
-          <label for="schedule_start_detail" class="col-form-label">시작 시간 설정</label>
-          <input type="text" class="form-control" id="schedule_start_detail" name="schedule_start" readonly>
-          <label for="schedule_end_detail" class="col-form-label">종료 시간 설정</label>
-          <input type="text" class="form-control" id="schedule_end_detail" name="schedule_end" readonly>
+        <div class="form-group text-center mb-2">
+          <label for="schedule_title_detail" class="col-form-label font-bold float-left mr-2 mb-2">일정 제목</label>
+          <input type="text" class="form-control input input-bordered mb-2 w-full" id="schedule_title_detail" name="schedule_title" readonly>
+          <label for="schedule_content_detail" class="col-form-label font-bold float-left mr-2 mb-2">일정 내용</label>
+          <input type="text" class="form-control input input-bordered mb-2 w-full" id="schedule_content_detail" name="schedule_content" readonly>
+          <label for="schedule_start_detail" class="col-form-label font-bold float-left mr-2 mb-2">시작 시간 설정</label>
+          <input type="text" class="form-control input input-bordered mb-2 w-full" id="schedule_start_detail" name="schedule_start" readonly>
+          <label for="schedule_end_detail" class="col-form-label font-bold float-left mr-2 mb-2">종료 시간 설정</label>
+          <input type="text" class="form-control input input-bordered mb-2 w-full" id="schedule_end_detail" name="schedule_end" readonly>
           <input type="hidden" id="schedule_code" name="schedule_code"/>
         </div>
       </div>
-      <div class="modal-footer">
-         
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-          <button type="button" class="btn btn-warning" id="modifyButton" data-dismiss="modal">수정</button>
-          <button type="button" class="btn btn-danger" id="deleteButton" data-dismiss="modal">삭제</button>
+      <br/>
+       <hr/>
+      <div class="modal-footer mt-2 flex justify-center">
+ 
+          <button type="button" class="btn bg-blue-400 ml-2" id="modifyButton" data-dismiss="modal">수정</button>
+          <button type="button" class="btn bg-red-400 ml-2" id="deleteButton" data-dismiss="modal">삭제</button>
 
       </div>
     </div>
   </div>
-</div>
+  </div>
+</dialog>
 
 
 
 <!-- 수정,삭제  -->
-<div class="modal fade" id="calendarModifyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<dialog class="modal fade" id="calendarModifyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
+  <div class="modal-box">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">일정 상세 정보</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+       <div class="flex justify-between">
+        <h5 class="modal-title font-bold text-xl" id="exampleModalLabel">일정 상세 정보</h5>
+        <button type="button" class="close  p-1 text-red-600 rounded-xl justify-self-end mb-2" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">X</span>
         </button>
+        </div>
       </div>
+      <hr/>
+      <br/>
       <div class="modal-body">
-        <div class="form-group">
-        <label for="schedule_title_modify" class="col-form-label">일정 제목</label>
-          <input type="text" class="form-control" id="schedule_title_modify" name="schedule_title" >
-          <label for="schedule_content_modify" class="col-form-label float-left">일정 내용</label>
-          <input type="text" class="form-control" id="schedule_content_modify" name="schedule_content" >
-          <label for="schedule_start_modify" class="col-form-label">시작 시간 설정</label>
-          <input type="datetime-local" class="form-control" id="schedule_start_modify" name="schedule_start">
-          <label for="schedule_end_modify" class="col-form-label">종료 시간 설정</label>
-          <input type="datetime-local" class="form-control" id="schedule_end_modify" name="schedule_end">
+        <div class="form-group text-center mb-2">
+        <label for="schedule_title_modify" class="col-form-label font-bold float-left mr-2 mb-2">일정 제목</label>
+          <input type="text" class="form-control input input-bordered mb-2 w-full" id="schedule_title_modify" name="schedule_title" >
+          <label for="schedule_content_modify" class="col-form-label font-bold float-left mr-2 mb-2">일정 내용</label>
+          <input type="text" class="form-control input input-bordered mb-2 w-full" id="schedule_content_modify" name="schedule_content" >
+          <label for="schedule_start_modify" class="col-form-label font-bold float-left mr-2 mb-2">시작 시간 설정</label>
+          <input type="datetime-local" class="form-control input input-bordered mb-2 w-full" id="schedule_start_modify" name="schedule_start">
+          <label for="schedule_end_modify" class="col-form-label font-bold float-left mr-2 mb-2">종료 시간 설정</label>
+          <input type="datetime-local" class="form-control input input-bordered mb-2 w-full" id="schedule_end_modify" name="schedule_end">
           <input type="hidden" id="schedule_code" name="schedule_code"/>
 
         </div>
       </div>
-      <div class="modal-footer">
-
-        <button type="button" class="btn btn-warning" id="confirmModifyButton" data-dismiss="modal">완료</button>
-        <button type="button" class="btn btn-danger" id="deleteButton" data-dismiss="modal">취소</button>
+      <br/>
+       <hr/>
+      <div class="modal-footer mt-2 flex justify-center">
+ 
+          <button type="button" class="btn bg-blue-400 ml-2" id="calendarModifyModal" data-dismiss="modal">완료</button>
+             <button  type="button" class="btn bg-red-400 ml-2" id="deleteButton" data-dismiss="modal">취소</button>
 
       </div>
     </div>
   </div>
 </div>
-</div>
+
+</dialog>
 
 
 
