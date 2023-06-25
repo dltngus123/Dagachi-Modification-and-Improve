@@ -245,10 +245,11 @@ window.addEventListener('load', function(){
       </div>
       <div class="modal-body ">
 <form method="POST" action="../reservation/insert" id="room-form">
+   
   <div style="display:flex; align-items: center; margin-top: 50px;">
     <input type="hidden" name="room_code" />
     <label for="room_name" class="font-bold mr-2">회의실 이름:</label>
-    <input class="w-3/4 input input-bordered text-sm" type="text" id="room_name" name="room_name" placeholder="회의실 이름을 입력하세요">
+    <input class="w-3/4 input input-bordered text-sm" type="text" id="room_name" name="room_name" placeholder="예시)1층 OO회의실[숫자 회의실명]">
   </div>
   <div style="display: flex; justify-content: flex-end; margin-top: 100px;">
     <input type="submit" class="btn bg-blue-400 mr-2" style="color: white; border: none;" value="등록" />
