@@ -54,6 +54,7 @@
                 <th class="text-center">사진</th>
                <th>이름</th>
                  <th>전화번호</th>
+                 <th>상태</th>
                  <th>이메일</th>
                  <th>부서</th>
                  <th>팀</th>
@@ -76,8 +77,29 @@
               </td>
               
               <td>${companyPhone.member_phone}</td>
+              <td>
+                       
+		       <c:if test="${companyPhone.member_status  eq 1 }">
+		       <span class="badge bg-blue-400 text-white p-2">출근</span>
+		     </c:if>
+		     
+		     	 <c:if test="${companyPhone.member_status  eq 2 }">
+		       <span class="badge bg-red-400 text-white p-2">퇴근</span>
+		     </c:if>
+		       
+		       <c:if test="${companyPhone.member_status  eq 4 }">
+		       <span class="badge bg-yellow-400">연차</span>
+		     </c:if>
+		       <c:if test="${companyPhone.member_status  eq 5 }">
+		       <span class="badge bg-yellow-400">월차</span>
+		     </c:if>
+		       <c:if test="${companyPhone.member_status  eq 3 }">
+		       <span class="badge bg-gray-400 text-white">자리비움</span>
+		     </c:if>
+
+             </td>
               
-              <td>${companyPhone.member_email }</td>
+              <td>${companyPhone.member_email } <a href="mailto:${companyPhone.member_email }"><button style="font-size:x-small;" class="btn btn-sm bg-yellow-400">send email</button></a></td>
               
               <td>${companyPhone.member_department1 }</td>
               <td>${companyPhone.member_team1 }</td>

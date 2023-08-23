@@ -120,13 +120,13 @@
 				</div>
 				</c:if>
 				  <div class="row">
-  <div class="col text-center">
+  <div class="col  text-center">
     <nav aria-label="Contacts Page Navigation" >
       <c:set var="pageMenuArmLen" value="4" />
       <c:set var="startPage" value="${param.page - pageMenuArmLen < 1 ? 1 : param.page - pageMenuArmLen}" />
       <c:set var="endPage" value="${param.page + pageMenuArmLen > pagesCount ? pagesCount : param.page + pageMenuArmLen}" />
       <c:set var="pageBaseUri" value="Type=${empty Type ? '' : Type}&sk=${sk}&st=${st}&save=${save }" />
-      <ul class="pagination justify-content-center m-0"  >
+      <ul class="pagination flex justify-center m-0"  >
         <c:if test="${startPage > 1}">
           <li class="page-item">
             <a class="page-link btn btn-sm" href="?${pageBaseUri}&page=1">1</a>

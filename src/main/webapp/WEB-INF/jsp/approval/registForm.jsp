@@ -135,7 +135,7 @@
 							</div>
 
 							<div class="card-body " style="height: 70px; width:180px; ">
-								<span style="font-size: 12px; id="info1"></span>
+									<span style="font-size: 12px;" id="info1"></span>
 							</div>
 
 						</div>

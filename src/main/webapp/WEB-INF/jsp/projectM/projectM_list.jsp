@@ -159,10 +159,10 @@ function moveToRight(pl_Id,pm_Id){
 		var check=$(cardClaText).length;
 		var pmNameClass='pl'+pl_Id+'pm'+pm_Id;
 		var pmNameText=$('.'+pmNameClass+'name').text().trim();
-		var moveText='<li class="flex" id="'+pmNameClass+'" style="list-style:none;" onclick="moveToLeft('+pl_Id+','+pm_Id+')">'+
+		var moveText='<li class="flex p-2 bg-white rounded-3xl" id="'+pmNameClass+'" style="list-style:none;" onclick="moveToLeft('+pl_Id+','+pm_Id+')">'+
 						'<div class="w-5/6">'+pmNameText+'</div>'+
 						
-						'<div class="w-1/6 text-center">'+'<span class="badge bg-red-300">x</span>'+'</div>'
+						'<div class="w-1/6 text-center">'+'<span class="badge bg-red-300">X</span>'+'</div>'
 					'</li>';
 		
 		

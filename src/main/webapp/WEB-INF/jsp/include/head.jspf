@@ -123,12 +123,16 @@
        <c:if test="${loginUser.member_status eq 1 }">
        <span class="badge bg-primary text-white p-2">출근</span>
      </c:if>
+     
+     <c:if test="${loginUser.member_status eq 2 }">
+       <span class="badge bg-gray-400 text-white p-2">퇴근</span>
+     </c:if>
        
        <c:if test="${loginUser.member_status eq 4 }">
-       <span class="badge bg-waring">연차</span>
+       <span class="badge bg-yellow-400 ">연차</span>
      </c:if>
        <c:if test="${loginUser.member_status eq 5 }">
-       <span class="badge bg-waring">월차</span>
+       <span class="badge bg-yellow-400">월차</span>
      </c:if>
        <c:if test="${loginUser.member_status eq 3 }">
        <span class="badge bg-red-500 text-white">자리비움</span>
@@ -145,7 +149,10 @@
     <select class="form-control" name="perPageNum" id="perPageNum" onchange="updateMemberStatusDisplay()">
         <option value="" selected="상태">상태</option>
         <option value="1">출근</option>
+        <option value="2">퇴근</option>
         <option value="3">자리비움</option>
+        <option value="4">연차</option>
+        <option value="5">월차</option>
     </select>
 </div>
 </div>

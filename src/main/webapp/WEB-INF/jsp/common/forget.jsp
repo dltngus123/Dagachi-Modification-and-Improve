@@ -233,9 +233,9 @@ margin-left:20px;
    
    <div id="modal-id" class="modal-overlay">
    <div class="modal-window">
-   <div class="card border-success mb-3" style="height:100%;">
+   <div class="card bg-gray-200 border-success mb-3" style="height:100%;">
     <div class="card-header text-bold text-center text-2xl">아이디를 잊으셨나요?</div>
-  <div class="card-body flex items-center">
+  <div class="card-body flex  items-center">
   <div class="resultid w-full text-center text-2xl text-bold">
         회원님의 찾으신 아이디는
         <br/>
@@ -254,7 +254,7 @@ margin-left:20px;
    
    <div id="modal-pwd" class="modal-overlay">
    <div class="modal-window">
-   <div class="card border-success mb-3" style="height:100%;">
+   <div class="card bg-gray-200 border-success mb-3" style="height:100%;">
     <div class="card-header text-bold text-center text-2xl">비밀번호를 잊으셨나요?</div>
   <div class="card-body flex items-center">
   <div id="resultPwd" class="resultPwd w-full text-center text-2xl text-bold">
@@ -389,7 +389,7 @@ function idfind_go() {
               }else{
                  var resultHTML =
                      "찾으신 비밀번호는"+
-                     "<p id='rePwd' class='text-bold text-6xl text-success reId'>" + response + "</p>"
+                     "<p id='rePwd' class='text-bold bg-gray-200 text-6xl text-success reId'>" + response + "</p>"
                      +"입니다.";
                  
                   resultPwdElement.innerHTML = resultHTML;

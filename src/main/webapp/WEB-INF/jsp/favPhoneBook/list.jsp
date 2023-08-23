@@ -70,7 +70,9 @@
 	           
 	           <td>${sharePhone.phone_Book_Phone }</td>
 	           
-	           <td>${sharePhone.phone_Book_Email }</td>
+	           
+	           
+	           <td>${sharePhone.phone_Book_Email }  <a href="mailto:${sharePhone.phone_Book_Email }"><button style="font-size:x-small;" class="btn btn-sm bg-yellow-400">send email</button></a></td>
 	           
 	           <td>${sharePhone.phone_Book_Company }</td>
 	           

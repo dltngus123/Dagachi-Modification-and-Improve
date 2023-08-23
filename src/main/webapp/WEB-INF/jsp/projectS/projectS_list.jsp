@@ -30,13 +30,13 @@
 <section class="content p-4  flex resultPs">
 <div class="container-fluid flex w-full h-100 justify-center">
 
-<div class="w-1/4 card-primary mr-2 border rounded-t-3xl" style="height: 80vh;">
+<div class="w-1/4 card-primary mr-2 border rounded-t-3xl  " style="max-height: 80vh; height:80vh; overflow-y:scroll;" >
 <div class="bg-gray-300 rounded-t-3xl p-2">
 <h3 class="card-title">
 	할 일
 </h3>
 </div>
-	<div class="flex flex-col">
+	<div class="flex flex-col h-full">
 	<c:forEach var="wait" items="${pSWaitList }">
 		<div class="w-full bg-gray-200 rounded-3xl p-2 mb-1">
 		
